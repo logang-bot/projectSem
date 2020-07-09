@@ -7,7 +7,8 @@ router.get('/', (req,res)=>{
 
 //rutas para usuario
 router.get('/user',user.index),
-/*router.post('/user/signUp',user.signUp)
+router.post('/user/signUp',user.signUp)
+/*
 router.post('/user/logIn',user.logIn)
 router.put('/user/edit/:id',user.edit)
 router.delete('/user/delete/:id',user.delete)
