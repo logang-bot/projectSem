@@ -2,12 +2,18 @@
 [X]conexion de la aplicacion con la base de datos
 [x]creacion de modelos DB
 [x]seteo de las rutas
+[]CRUD  para usuario
+    []creacion de usuario  N 
+    []login para usuario G
+    []actualizacion usuario R
+    []eliminar usuario G
 []CRUD  para restaurante
     []creacion de restaurantes por usuario
     []actualizacion de restaurantes
     []eliminar restaurantes
     []cambio de dueño de Restaurante
     []listar restaurantes por usuario
+    []listar todos los restaurantes
 []CRUD  para menus
     []creacion de menu por restaurante
     []actualizacion de menu
@@ -19,12 +25,8 @@
     []listar carrito
     []actualizacion de orden (carrito) 
     []eliminar de orden (carrito)
-[.]CRUD  para usuario
-    [X]creacion de usuario
-    []actualizacion usuario
-    []eliminar usuario
-    []listar todos los restaurantes
-[]login para usuario
+
+
 []proteccion de rutas con autenticacion passport ?
 []subida de archivos
 []guardado de fotos en DB
