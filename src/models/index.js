@@ -1,5 +1,3 @@
-const restaurant = require('./restaurant');
-
 module.exports={
     user: require('./user'),
     restaurant: require('./restaurant'),

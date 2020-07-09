@@ -1,5 +1,5 @@
 const router  = require('express').Router()
-
+const {user} = require('../controllers')
 
 router.get('/', (req,res)=>{
     res.send('que pex')
@@ -7,11 +7,11 @@ router.get('/', (req,res)=>{
 
 //rutas para usuario
 router.get('/user',user.index),
-router.post('/user/signUp',user.signUp)
+/*router.post('/user/signUp',user.signUp)
 router.post('/user/logIn',user.logIn)
 router.put('/user/edit/:id',user.edit)
 router.delete('/user/delete/:id',user.delete)
-
+/*
 //rutas para restaurant
 router.get('/res',res.index),
 router.post('/res/create',res.create)
@@ -28,6 +28,6 @@ router.delete('/menu/delete/:id',menu.delete)
 router.get('/orden',orden.index),
 router.post('/orden/create',orden.create)
 router.put('/orden/edit/:id',orden.edit)
-router.delete('/orden/delete/:id',orden.delete)
+router.delete('/orden/delete/:id',orden.delete)*/
 
 module.exports = router
