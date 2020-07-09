@@ -7,18 +7,18 @@ const routes = require('../routes')
 
 require('../config/passport')
 
+app.set('port', process.env.PORT || 8000)
 app.use(morgan('dev'))
 
+app.use(express.urlencoded({extended: false}))
 app.use(session({
     secret: 'appsecret',
     resave: true,
     saveUninitialized: true
 }))
-
-app.use(passport.initialize)
-app.use(passport.session)
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', routes)
-app.set('port', process.env.PORT || 8000)
 
 module.exports = app

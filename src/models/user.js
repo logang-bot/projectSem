@@ -15,7 +15,7 @@ userSchema.methods.encrypt = async (password)=>{
     return hash
 }
 
-userSchema.methods.match = async (password)=>{
+userSchema.methods.match = async function(password){
     return await bcrypt.compare(password, this.password)
 }
 

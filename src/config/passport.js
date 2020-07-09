@@ -13,13 +13,13 @@ passport.use(new localStrategy({
         return done(null, false)
     }
     else{
-        const match = await user.match(password)
+        const match = await userr.match(password)
         if(match){
             console.log('logueado')
-            return done(null,user)
+            return done(null,userr)
         }
         else{
-            console.log('las contraenias no coinciden')
+            console.log('las contrasenias no coinciden')
             return done(null,false)
         }
     }
