@@ -1,6 +1,6 @@
 [X]crear repositorio remoto en git
 [X]conexion de la aplicacion con la base de datos
-[X]creacion de modelos DB
+[]creacion de modelos DB
 []seteo de las rutas
 []CRUD  para restaurante
     []creacion de restaurantes por usuario
