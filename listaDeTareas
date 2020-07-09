@@ -1,0 +1,74 @@
+[X]crear repositorio remoto en git
+[X]conexion de la aplicacion con la base de datos
+[X]creacion de modelos DB
+[]seteo de las rutas
+[]CRUD  para restaurante
+    []creacion de restaurantes por usuario
+    []actualizacion de restaurantes
+    []eliminar restaurantes
+    []cambio de dueño de Restaurante
+    []listar restaurantes por usuario
+[]CRUD  para menus
+    []creacion de menu por restaurante
+    []actualizacion de menu
+    []eliminar menu
+    []listar menu por restaurante
+[]CRUD  para orden
+    []creacion de orden
+    []listar ordenes
+    []listar carrito
+    []actualizacion de orden (carrito) 
+    []eliminar de orden (carrito)
+[.]CRUD  para usuario
+    [X]creacion de usuario
+    []actualizacion usuario
+    []eliminar usuario
+    []listar todos los restaurantes
+[]login para usuario
+[]proteccion de rutas con autenticacion passport ?
+[]subida de archivos
+[]guardado de fotos en DB
+
+
+/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+Creación de Restaurantes
+
+POST, PUT, PATCH, GET, DELETE
+
+/restaurant
+
+El Restaurant debe contar con los siguientes atributos, 
+
+Nombre, Nit, Propietario, Calle, Telefono, Log, Lat, 
+Logo, fechaderegistro, fotolugar
+
+
+2. Creación de Menus
+
+/menus
+
+POST, GET, UPDATE, DELETE,
+
+Los menús deberán contemplar, los siguientes atributos.
+
+Nombre, precio, descripción, fechaderegistro, fotografía del producto. 
+
+3. Creación de Órdenes.
+
+/orden
+
+Las ordenen son los pedidos que un cliente realiza a un restaurante en función a su menu.
+
+POST, GET, UPDATE, DELETE
+
+atributos
+
+idmenu[], idrestorant[], cantidad[], idcliente, lugardeenvio(lat, long), pagototal,
+
+4. Creación de facturas
+
+El sistema deberá emitir una factura imprimible, al usuario y mandarsela a su correo electrónico,
+
+Get 
+
+/factura
