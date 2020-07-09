@@ -16,7 +16,7 @@ passport.use(new localStrategy({
         const match = await userr.match(password)
         if(match){
             console.log('logueado')
-            return done(null,userr)
+            return done(null,false)
         }
         else{
             console.log('las contrasenias no coinciden')
@@ -25,7 +25,7 @@ passport.use(new localStrategy({
     }
 }))
 
-passport.serializeUser((userr,done)=>{
+/*passport.serializeUser((userr,done)=>{
     done(null, userr.id)
 })
 
@@ -33,5 +33,5 @@ passport.deserializeUser((id, done)=>{
     user.findById(id,(err,user)=>{
         done(err,user)
     })
-})
+})*/
 module.exports = passport
