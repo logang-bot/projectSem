@@ -53,7 +53,7 @@ ctrl.signUp = async (req,res)=> {
 ctrl.login = async (req,res)=>{
     const {email, password} = req.body
     const userr = await user.findOne({email:email})
-    if (!user) return res.send('el usuario no esta registrado')
+    if (!userr) return res.send('el usuario no esta registrado')
     const pass = userr.match(password)
     if(!pass) return res.send('la contraseña es incorrecta')
     const token = jwt.sign({id: userr._id}, config.secret,{
@@ -72,21 +72,24 @@ ctrl.login = async (req,res)=>{
     })
 }
 
-ctrl.edit= async (req,res)=>{
-    var id=req.params.id;
-    var datos=req.body;
-    const usser= new user({password : datos.password});
-    usser.password=await usser.encrypt(datos.password); 
-    datos.password=usser.password;
+ctrl.edit = async (req, res) => {
+    var id = req.userId;
+    var datos = req.body;
+    const usser = new user({ password: datos.password });
+    usser.password = await usser.encrypt(datos.password);
+    datos.password = usser.password;
     //datos.name="elena";
     console.log(datos.name);
-    await user.findByIdAndUpdate(id, datos, (err, docs) => {
+    const us = user.findByIdAndUpdate(id, datos, (err, docs) => {
         if (err) {
-            res.status(500).json({msn: "Existen problemas en la base de datos"});
-             return;
-         } else{
-            res.status(200).send(docs);
-         }})}
+            res.status(500).json({ msn: "Existen problemas en la base de datos" });
+            return;
+        } else {
+            return res.status(200).json(docs);
+        }
+    })
+    console.log(us)
+}
 
 ctrl.delete = async (req,res)=>{
     console.log(req.userId)

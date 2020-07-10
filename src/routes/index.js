@@ -12,9 +12,8 @@ router.get('/', auth,(req,res)=>{
 router.get('/user',user.index),
 router.post('/user/signUp',user.signUp)
 router.post('/user/logIn',user.login)
+router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
-/*
-router.put('/user/edit/:id',user.edit)
 /*
 router.delete('/user/delete/:id',user.delete)
 /*
