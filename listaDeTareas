@@ -3,17 +3,19 @@
 [x]creacion de modelos DB
 [x]seteo de las rutas
 []CRUD  para usuario
-    []creacion de usuario  N 
-    []login para usuario G
+    [x]creacion de usuario  N 
+    [x]login para usuario G
     []actualizacion usuario R
-    []eliminar usuario G
+    [X]eliminar usuario 
 []CRUD  para restaurante
     []creacion de restaurantes por usuario
     []actualizacion de restaurantes
+        ***faltan atributos en user
     []eliminar restaurantes
-    []cambio de dueño de Restaurante
+        ***faltan atributos en user
+    []cambio de dueño de Restaurante G
     []listar restaurantes por usuario
-    []listar todos los restaurantes
+    []listar todos los restaurantes G
 []CRUD  para menus
     []creacion de menu por restaurante
     []actualizacion de menu
