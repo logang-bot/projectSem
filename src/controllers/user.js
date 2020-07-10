@@ -45,7 +45,7 @@ ctrl.login = async (req,res)=>{
     const {email, password} = req.body
     const userr = await user.findOne({email:email})
     if (!user) return res.send('el usuario no esta registrado')
-    const pass = userr.match(password)
+    const pass = await userr.match(password)
     if(!pass) return res.send('la contrasenia es incorrecta')
     const token = jwt.sign({id: userr._id}, config.secret,{
         expiresIn: 60 * 60 * 60
