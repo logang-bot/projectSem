@@ -56,6 +56,22 @@ ctrl.login = async (req,res)=>{
     })
 }
 
+ctrl.edit= async (req,res)=>{
+    var id=req.params.id;
+    var datos=req.body;
+    const usser= new user({password : datos.password});
+    usser.password=await usser.encrypt(datos.password); 
+    datos.password=usser.password;
+    //datos.name="elena";
+    console.log(datos.name);
+    await user.findByIdAndUpdate(id, datos, (err, docs) => {
+        if (err) {
+            res.status(500).json({msn: "Existen problemas en la base de datos"});
+             return;
+         } else{
+            res.status(200).send(docs);
+         }})}
+
 /*ctrl.logIn = passport.authenticate('local',{
     successRedirect: '/',
     failureRedirect: '/',
