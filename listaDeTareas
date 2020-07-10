@@ -3,10 +3,10 @@
 [x]creacion de modelos DB
 [x]seteo de las rutas
 []CRUD  para usuario
-    []creacion de usuario  N 
-    []login para usuario G
+    [x]creacion de usuario  N 
+    [x]login para usuario G
     []actualizacion usuario R
-    []eliminar usuario G
+    []eliminar usuario 
 []CRUD  para restaurante
     []creacion de restaurantes por usuario
     []actualizacion de restaurantes
