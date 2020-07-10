@@ -7,9 +7,9 @@ ctrl.index = async (req,res)=>{
 }
 
 ctrl.signUp = (req,res)=> {
-    var usuario= new user()
+    //var usuario= new user()
     console.log(req.body)
-    var {name,email,password} = req.body 
+    /*var {name,email,password} = req.body 
 
     if(name){  
         usuario.nombre = name;
@@ -31,7 +31,7 @@ ctrl.signUp = (req,res)=> {
         return res.status(400).send({
             message: 'El nombre es requerido'
         });
-    }
+    }*/
 }
 
 
