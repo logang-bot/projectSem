@@ -1,15 +1,18 @@
 const router  = require('express').Router()
 const {user} = require('../controllers')
+const auth = require('../helpers/auth')
 
-router.get('/', (req,res)=>{
+router.get('/', auth,(req,res)=>{
+    if(req.user) console.log(req.user.id)
+    else console.log('empty')
     res.send('que pex')
 })
 
 //rutas para usuario
 router.get('/user',user.index),
 router.post('/user/signUp',user.signUp)
+router.post('/user/logIn',user.login)
 /*
-router.post('/user/logIn',user.logIn)
 router.put('/user/edit/:id',user.edit)
 router.delete('/user/delete/:id',user.delete)
 /*
