@@ -54,17 +54,18 @@ ctrl.login = async (req,res)=>{
     const {email, password} = req.body
     const userr = await user.findOne({email:email})
     if (!userr) return res.send('el usuario no esta registrado')
-    const pass = userr.match(password)
+    const pass = await userr.match(password)
+    //console.log(pass)
     if(!pass) return res.send('la contraseña es incorrecta')
     const token = jwt.sign({id: userr._id}, config.secret,{
         expiresIn: 60 * 60 * 60
     })
     
-    
+    /*
     const decod = jwt.verify(token, config.secret)
     req.userId = decod.id
     console.log(req.userId)
-    
+    */
     
     res.send({
         message: "estas logueado",
@@ -80,7 +81,7 @@ ctrl.edit = async (req, res) => {
     datos.password = usser.password;
     //datos.name="elena";
     console.log(datos.name);
-    const us = user.findByIdAndUpdate(id, datos, (err, docs) => {
+    const us =user.findByIdAndUpdate(id, datos, (err, docs) => {
         if (err) {
             res.status(500).json({ msn: "Existen problemas en la base de datos" });
             return;
@@ -88,7 +89,7 @@ ctrl.edit = async (req, res) => {
             return res.status(200).json(docs);
         }
     })
-    console.log(us)
+    //console.log()
 }
 
 ctrl.delete = async (req,res)=>{
