@@ -2,7 +2,7 @@ const router  = require('express').Router()
 const {user} = require('../controllers')
 const auth = require('../helpers/auth')
 
-router.get('/', auth,(req,res)=>{
+router.get('/', auth, (req,res)=>{
     if(req.user) console.log(req.user.id)
     else console.log('empty')
     res.send('que pex')
@@ -19,7 +19,7 @@ router.delete('/user/delete/:id',user.delete)
 /*
 //rutas para restaurant
 router.get('/res',res.index),
-router.post('/res/create',res.create)
+router.post('/res/create',auth,res.create)
 router.put('/res/edit/:id',res.edit)
 router.delete('/res/delete/:id',res.delete)
 
