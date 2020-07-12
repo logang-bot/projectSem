@@ -10,7 +10,7 @@ ctrl.create = async (req,res)=>{
     if(!descripcion) errors.push({error: 'es necesario una descripcion del producto'})
     if(errors.length>0) return res.status(501).json(errors)
     else{
-        const men = await menu.findOne({nombre})
+        const men = await menu.findOne({nombre, id_rest: req.params.idRes})
         if(men) return res.send('ya registro un producto con este nombre')
         else{
             const newmenu  = new menu(req.body)
