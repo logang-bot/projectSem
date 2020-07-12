@@ -24,11 +24,11 @@ ctrl.create = async (req,res)=>{
 
 
 ctrl.index = async (req, res) => {
-    const f_resta = await restaurant.findOne({ id: req.params.idRes })
+    const f_resta = await restaurant.findOne({ _id: req.params.idRes })
     if (!f_resta)
         return res.status(400).json ({message: "no existe el restaurant"});
     else{
-        const menus= await menu.find({ id_res : f_resta})
+        const menus= await menu.find({ id_rest : f_resta.id})
         if (menus)
             return res.status(200).json(menus)
         return res.status(400).json({ message: "Este restaurant no tiene menus " })
