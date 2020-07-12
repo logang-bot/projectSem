@@ -20,8 +20,8 @@ router.delete('/user/delete', auth , user.delete)
 //rutas para restaurant
 
 router.post('/res/create',auth,restaurant.create)
-router.put('/res/edit',restaurant.edit)
-router.patch('/res/chang/:id', restaurant.change)
+//router.put('/res/edit',restaurant.edit)
+router.patch('/res/chang/:id',auth, restaurant.change)
 /*
 router.get('/res',res.index),
 router.delete('/res/delete/:id',res.delete)

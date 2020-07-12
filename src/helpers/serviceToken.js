@@ -7,7 +7,7 @@ ctrl.createToken =  id => {
     const params = {
         id: id,
         iat: moment().unix(),
-        exp: moment().add(1, 'minute').unix()
+        exp: moment().add(1, 'hour').unix()
     }
     return jwt.sign(params, config.secret)
 

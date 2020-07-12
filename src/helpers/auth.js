@@ -13,7 +13,7 @@ function auth(req,res,next){
             console.log(moment())
             console.log(decod)
             req.userId = decod.id
-            console.log(req.userId)
+            //console.log(req.userId)
             next()
         }
         else return res.send('token invalido')
