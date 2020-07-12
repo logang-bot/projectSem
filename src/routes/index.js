@@ -1,5 +1,5 @@
 const router  = require('express').Router()
-const {user} = require('../controllers')
+const {user,restaurant} = require('../controllers')
 const auth = require('../helpers/auth')
 
 router.get('/', auth, (req,res)=>{
@@ -14,13 +14,15 @@ router.post('/user/signUp',user.signUp)
 router.post('/user/logIn',user.login)
 router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
-/*
-router.delete('/user/delete/:id',user.delete)
-/*
+
+
+
 //rutas para restaurant
+
+router.post('/res/create',auth,restaurant.create)
+router.put('/res/edit',restaurant.edit)
+/*
 router.get('/res',res.index),
-router.post('/res/create',auth,res.create)
-router.put('/res/edit/:id',res.edit)
 router.delete('/res/delete/:id',res.delete)
 
 //rutas para menu
