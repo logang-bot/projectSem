@@ -27,17 +27,13 @@ router.patch('/res/chang/:id',auth, restaurant.change)
 router.delete('/res/delete/:id',restaurant.delete)
 
 //rutas para menu
-router.put('/menu/edit/:id',menu.edit)
+router.get('/menu/:idRes',menu.index)
 router.post('/menu/create/:idRes',menu.create)
-/*
-router.get('/menu',menu.index),
-router.post('/menu/create',menu.create)
-
-/*router.get('/menu',menu.index),
 router.put('/menu/edit/:id',menu.edit)
 router.delete('/menu/delete/:id',menu.delete)
 
 //rutas para orden
+/*
 router.get('/orden',orden.index),
 router.post('/orden/create',orden.create)
 router.put('/orden/edit/:id',orden.edit)
