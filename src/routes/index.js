@@ -1,5 +1,5 @@
 const router  = require('express').Router()
-const {user,restaurant} = require('../controllers')
+const {user, restaurant} = require('../controllers')
 const auth = require('../helpers/auth')
 
 router.get('/', auth, (req,res)=>{
@@ -21,6 +21,7 @@ router.delete('/user/delete', auth , user.delete)
 
 router.post('/res/create',auth,restaurant.create)
 router.put('/res/edit',restaurant.edit)
+router.patch('/res/chang/:id', restaurant.change)
 /*
 router.get('/res',res.index),
 router.delete('/res/delete/:id',res.delete)

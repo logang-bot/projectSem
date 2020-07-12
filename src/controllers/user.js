@@ -1,8 +1,6 @@
 const ctrl = {}
 const {user} = require('../models')
-const passport = require('passport')
-const jwt = require('jsonwebtoken')
-const config = require('../config/config')
+const serviceToken = require('../helpers/serviceToken')
 
 ctrl.index = async (req,res)=>{
     const users = await user.find({})
@@ -27,16 +25,11 @@ ctrl.signUp = async (req,res)=> {
         await usuario.save((err, usersaved) => {
             if(err) return res.status(500).send({message: `Error en el servidor ${err}`});
             if(usersaved){
-                const token = jwt.sign({id: usersaved._id}, config.secret,{
-                    expiresIn: 60 * 60 * 24
-                })
-                const decod = jwt.verify(token, config.secret)
-                req.userId = decod.id
-
+                const token = serviceToken.createToken(usersaved.id)
                 return res.status(200).send({
-                usuario: usersaved,
-                token: token 
-            });
+                    usuario: usersaved,
+                    token: token
+                });
             
             }else{
                 return res.status(500).send({
@@ -57,16 +50,7 @@ ctrl.login = async (req,res)=>{
     const pass = await userr.match(password)
     //console.log(pass)
     if(!pass) return res.send('la contraseña es incorrecta')
-    const token = jwt.sign({id: userr._id}, config.secret,{
-        expiresIn: 60 * 60 * 60
-    })
-    
-    /*
-    const decod = jwt.verify(token, config.secret)
-    req.userId = decod.id
-    console.log(req.userId)
-    */
-    
+    const token = serviceToken.createToken(userr.id)
     res.send({
         message: "estas logueado",
         token: token
