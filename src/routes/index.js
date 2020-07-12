@@ -20,13 +20,12 @@ router.delete('/user/delete', auth , user.delete)
 //rutas para restaurant
 
 router.get('/res',restaurant.index)
+router.get('/res/list',auth,restaurant.index2)
 router.post('/res/create',auth,restaurant.create)
-//router.put('/res/edit',restaurant.edit)
+router.put('/res/edit/:id',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)
+router.delete('/res/delete/:id',restaurant.delete)
 /*
-router.get('/res',res.index),
-router.delete('/res/delete/:id',res.delete)
-
 //rutas para menu
 router.get('/menu',menu.index),
 router.post('/menu/create',menu.create)
