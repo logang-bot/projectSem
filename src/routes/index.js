@@ -19,6 +19,7 @@ router.delete('/user/delete', auth , user.delete)
 
 //rutas para restaurant
 
+router.get('/res',restaurant.index)
 router.post('/res/create',auth,restaurant.create)
 //router.put('/res/edit',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)

@@ -2,8 +2,8 @@ const ctrl = {}
 const {restaurant,user} = require('../models')
 const config = require('../config/config')
 
-ctrl.index = (req,res)=>{
-    const rests = restaurant.find({})
+ctrl.index = async (req,res)=>{
+    const rests = await restaurant.find({})
     res.send(rests)
 }
 
