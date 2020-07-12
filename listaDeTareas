@@ -8,14 +8,14 @@
     [X]actualizacion usuario 
     [X]eliminar usuario 
 []CRUD  para restaurante
-    []creacion de restaurantes por usuario N
+    [x]creacion de restaurantes por usuario N
     []actualizacion de restaurantes N
         ***faltan atributos en user
-    []eliminar restaurantes R
+    [x]eliminar restaurantes R
         ***faltan atributos en user
-    []cambio de dueño de Restaurante G
-    []listar restaurantes por usuario R
-    []listar todos los restaurantes G
+    [x]cambio de dueño de Restaurante G
+    [x]listar restaurantes por usuario R
+    [x]listar todos los restaurantes G
 []CRUD  para menus
     []creacion de menu por restaurante
     []actualizacion de menu
