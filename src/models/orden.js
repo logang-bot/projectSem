@@ -7,17 +7,15 @@ const orden = new Schema({
         type: Schema.Types.ObjectId,
         ref: "menu"
     },
-    idrest:{ 
-        type: Schema.Types.ObjectId,
-        ref: "restaurant"
-    },
     iduser:{ 
         type: Schema.Types.ObjectId,
         ref: "user"
     },
-    Cantidad:{type: Number},
-    Log:{type: String},
-    Lat:{type: String},
-    PagoTotal: {type: Number}
+
+    cantidad:{type: Number},
+    log:{type: String},
+    lat:{type: String},
+    pagoTotal: {type: Number},
+    estado:{type: String , default: "0"}
 })
 module.exports = mongoose.model("orden", orden);
