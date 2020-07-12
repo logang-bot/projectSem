@@ -25,11 +25,12 @@ router.post('/res/create',auth,restaurant.create)
 router.put('/res/edit/:id',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)
 router.delete('/res/delete/:id',restaurant.delete)
-/*
+
 //rutas para menu
+router.put('/menu/edit/:id',menu.edit)
+/*
 router.get('/menu',menu.index),
 router.post('/menu/create',menu.create)
-router.put('/menu/edit/:id',menu.edit)
 router.delete('/menu/delete/:id',menu.delete)
 
 //rutas para orden
