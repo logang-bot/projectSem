@@ -22,10 +22,9 @@ router.delete('/user/delete', auth , user.delete)
 router.post('/res/create',auth,restaurant.create)
 //router.put('/res/edit',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)
-/*
-router.get('/res',res.index),
+/*router.get('/res',res.index),
 router.delete('/res/delete/:id',res.delete)
-
+/*
 //rutas para menu
 router.get('/menu',menu.index),
 router.post('/menu/create',menu.create)
