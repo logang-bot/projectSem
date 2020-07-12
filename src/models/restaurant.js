@@ -2,15 +2,15 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const Res = new Schema({
-    Nombre:{type: String},
-    Nit:{type: String},
-    Propietario:{type: String},
-    Calle:{type: String},
-    Telefono:{type: String},
-    Log:{type: String},
-    Lat:{type: String},
-    Logo:{type: String, default:""},
-    FechaReg:{type: Date,default:Date.now},
-    Foto:{type: String, default:""}
+    nombre:{type: String},
+    nit:{type: String},
+    propietario:{type: String},
+    calle:{type: String},
+    telefono:{type: String},
+    log:{type: String},
+    lat:{type: String},
+    logo:{type: String, default:""},
+    fechaReg:{type: Date,default:Date.now},
+    foto:{type: String, default:""}
 })
 module.exports = mongoose.model("restaurant", Res);
