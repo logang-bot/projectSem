@@ -29,11 +29,11 @@ router.delete('/res/delete/:id',restaurant.delete)
 //rutas para menu
 router.get('/menu/:idRes',menu.index)
 router.post('/menu/create/:idRes',menu.create)
+router.put('/menu/edit/:id',menu.edit)
 router.delete('/menu/delete/:id',menu.delete)
-/*router.put('/menu/edit/:id',menu.edit)
-
 
 //rutas para orden
+/*
 router.get('/orden',orden.index),
 router.post('/orden/create',orden.create)
 router.put('/orden/edit/:id',orden.edit)
