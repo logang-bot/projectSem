@@ -7,20 +7,18 @@
     [X]login para usuario 
     [X]actualizacion usuario 
     [X]eliminar usuario 
-[]CRUD  para restaurante
+[x]CRUD  para restaurante
     [x]creacion de restaurantes por usuario N
-    []actualizacion de restaurantes N
-        ***faltan atributos en user
-    [x]eliminar restaurantes R
-        ***faltan atributos en user
+    [X]actualizacion de restaurantes N   
+    [x]eliminar restaurantes R  
     [x]cambio de dueño de Restaurante G
     [x]listar restaurantes por usuario R
     [x]listar todos los restaurantes G
 []CRUD  para menus
-    []creacion de menu por restaurante
-    []actualizacion de menu
-    []eliminar menu
-    []listar menu por restaurante
+    []creacion de menu por restaurante G
+    []actualizacion de menu R
+    []eliminar menu N
+    []listar menu por restaurante N
 []CRUD  para orden
     []creacion de orden
     []listar ordenes
@@ -29,7 +27,7 @@
     []eliminar de orden (carrito)
 
 
-[]proteccion de rutas con autenticacion passport ?
+[x]proteccion de rutas con autenticacion JWT
 []subida de archivos
 []guardado de fotos en DB
 
