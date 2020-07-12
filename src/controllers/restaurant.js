@@ -2,6 +2,10 @@ const ctrl = {}
 const {restaurant,user} = require('../models')
 const config = require('../config/config')
 
+ctrl.index = (req,res)=>{
+    const rests = restaurant.find({})
+    res.send(rests)
+}
 
 ctrl.create = async (req,res)=> {
     var newresta= new restaurant
