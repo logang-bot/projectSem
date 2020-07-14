@@ -12,6 +12,7 @@ const menu = new Schema({
         type: Schema.Types.ObjectId,
         ref : 'restaurant'
     },
-    contador: {type: Number, default:0}
+    contador: {type: Number, default:0},
+    cantidad_por_dia: {type: Number, required: true}
 })
 module.exports = mongoose.model("menu", menu);

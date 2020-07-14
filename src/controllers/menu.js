@@ -16,11 +16,12 @@ ctrl.index = async (req, res) => {
     }
 }
 ctrl.create = async (req,res)=>{
-    const {nombre, precio, descripcion, foto} = req.body
+    const {nombre, precio, descripcion, cantidad_por_dia} = req.body
     const errors = []
     if(!nombre) errors.push({error: 'por favor introduzca un nombre'})
     if(!precio) errors.push({error: 'el precio tiene que ser mayor a cero'})
     if(!descripcion) errors.push({error: 'es necesario una descripcion del producto'})
+    if(!cantidad_por_dia) errors.push({error: "la cantidad por dia es requerida"})
     if(errors.length>0) return res.status(501).json(errors)
     else{
         const men = await menu.findOne({nombre, id_rest: req.params.idRes})
@@ -50,7 +51,7 @@ ctrl.index = async (req, res) => {
 ctrl.edit = async (req, res) => {
     const id = req.params.id
     var datos = req.body;
-    if(!datos.nombre || !datos.precio || !datos.descripcion){
+    if(!datos.nombre || !datos.precio || !datos.descripcion || !datos.cantidad_por_dia){
         return res.status(400).send({message: 'No se permite campos vacios'});
     }else {
         const oldmenu=await menu.findById(id)
