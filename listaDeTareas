@@ -14,18 +14,27 @@
     [x]cambio de dueño de Restaurante G
     [x]listar restaurantes por usuario R
     [x]listar todos los restaurantes G
-[]CRUD  para menus
-    []creacion de menu por restaurante G
-    []actualizacion de menu R
-    []eliminar menu N
-    []listar menu por restaurante N
+[X]CRUD  para menus
+    [X]creacion de menu por restaurante G
+    [X]actualizacion de menu R
+    [X]eliminar menu N
+    [X]listar menu por restaurante N
 []CRUD  para orden
-    []creacion de orden
-    []listar ordenes
-    []listar carrito
-    []actualizacion de orden (carrito) 
-    []eliminar de orden (carrito)
+    []creacion de pedido (agregar al carrito)G
+    []actualizacion de pedido (carrito) R
+    []eliminar pedido (carrito) N
+    []listar pedidos  (carrito)G
+    []confirmar orden N
+    []listar ordenes por usuario R
+    []listar recibidos por usuario G
 
+    []listar ordenes solicitadas por usuario (dueño) R
+    []listar ordenes entregadas por usuario (dueño)N
+
+    []confirmar recepcion por parte de usuario G
+    
+    pedido 0, orden 1, recibido 2
+    
 
 [x]proteccion de rutas con autenticacion JWT
 []subida de archivos
