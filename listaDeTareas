@@ -21,22 +21,24 @@
     [X]listar menu por restaurante N
 []CRUD  para orden
         USER    
+    []listar pedidos  (carrito)G
     []creacion de pedido (agregar al carrito)G
     []actualizacion de pedido (carrito) R
     []eliminar pedido (carrito) N
-    []listar pedidos  (carrito)G
     []confirmar orden (poner en modo espera) N
     []listar ordenes por usuario R
-    []listar recibidos por usuario G
+    []listar en espera por usuario G
+    []confirmar recepcion por parte de usuario G
 
         OWNER
     []listar ordenes solicitadas por usuario (dueño) R
+    []listar ordenes solicitadas por restaurant (dueño) N
+    []listar ordenes solicitadas por menu (dueño) R
     []cambiar de estado espera a proceso N
     []cambiar de estado proceso a enviado G
     []listar ordenes enviadas por usuario (dueño) R
     []listar ordenes entregadas por usuario (dueño)N
 
-    []confirmar recepcion por parte de usuario G
     
     pedido 0, espera 1, proceso 2, enviado 3, recibido 4
     

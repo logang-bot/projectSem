@@ -1,5 +1,5 @@
 const router  = require('express').Router()
-const {user, restaurant, menu} = require('../controllers')
+const {user, restaurant, menu, orden} = require('../controllers')
 const auth = require('../helpers/auth')
 
 router.get('/', auth, (req,res)=>{
@@ -33,10 +33,22 @@ router.put('/menu/edit/:id',menu.edit)
 router.delete('/menu/delete/:id',menu.delete)
 
 //rutas para orden
-/*
-router.get('/orden',orden.index),
-router.post('/orden/create',orden.create)
-router.put('/orden/edit/:id',orden.edit)
-router.delete('/orden/delete/:id',orden.delete)*/
+//user
+router.get('/orden/listcart',orden.index)
+router.post('/orden/cart/:idMenu',auth, orden.cart)
+/*router.put('/orden/edit/:id', orden.edit)
+router.delete('/orden/delete/:id', orden.delete)
+router.put('/orden/create/:id', orden.create)
+router.get('/orden/list',auth, orden.ord)
+router.get('/orden/listwait',auth, orden.wait)
+router.put('/orden/confirmrec',auth, orden.confrec)
+//owner
+router.get('/orden/ow/listall', orden.owall)
+router.get('/orden/ow/listres', orden.owres)
+router.get('/orden/ow/listmen', orden.owmen)
+router.put('/orden/ow/toproc', orden.owtoproc)
+router.put('/orden/ow/tosend', orden.owtosend)
+router.get('/orden/ow/listsend', orden.owsend)
+router.get('/orden/ow/listdeliv', orden.owdeliv)*/
 
 module.exports = router
