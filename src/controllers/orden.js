@@ -1,13 +1,28 @@
 const ctrl = {}
-const {orden, menu} = require('../models')
+const {orden, menu, restaurant} = require('../models')
 
 ctrl.index = async (req,res)=>{
-    const ords = await orden.find({iduser: req.idUser, estado: "0"}) 
+    const ords = await orden.find({iduser: req.userId, estado: "0"}) 
     res.status(200).json(ords)
 }
 
+ctrl.test = async (req,res)=>{
+    const {idRes} = req.params
+    const menus  = await menu.find({id_rest: idRes}, {nombre: 0, foto:0, contador:0, precio:0, descripcion:0,fechareg:0})
+    /*let k = 0
+    console.log(menus[k].id)*/
+    const orders = []
+    let i = 0
+    for(i=0; i<menus.length; i++){
+        const or = await orden.find({idmenu: menus[i].id})
+        if(or.length>0) orders.push(or)
+    }
+    res.send(orders)
+}
+
 ctrl.cart = async (req, res) => {
-    const idUser = req.idUser
+    const idUser = req.userId
+    console.log(req.idUser)
     const neworden = new orden(req.body)
     const errors = []
     if (!neworden.cantidad || neworden.cantidad <= 0) errors.push({ error: "la cantidad debe ser mayor a cero" })
@@ -25,6 +40,7 @@ ctrl.cart = async (req, res) => {
             const total = parseFloat(men.precio) * parseFloat(neworden.cantidad)
             neworden.pagoTotal = total
             neworden.iduser = idUser
+            console.log(neworden.iduser +" "+ idUser)
             men.cantidad_por_dia -= neworden.cantidad
             await neworden.save()
             await men.save()

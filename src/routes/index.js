@@ -16,7 +16,6 @@ router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
 
 
-
 //rutas para restaurant
 
 router.get('/res',restaurant.index)
@@ -41,6 +40,8 @@ router.put('/orden/edit/:id', orden.edit)
 router.get('/orden/listwait',auth, orden.wait)
 router.put('/orden/confirmrec',auth, orden.confrec)
 router.put('/orden/ow/tosend',auth, orden.owtosend)
+
+router.get('/orden/test/:idRes', orden.test)
 /*router.put('/orden/edit/:id', orden.edit)
 router.delete('/orden/delete/:id', orden.delete)
 router.put('/orden/create/:id', orden.create)*/

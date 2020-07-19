@@ -8,8 +8,7 @@ const orden = new Schema({
         ref: "menu"
     },
     iduser:{ 
-        type: Schema.Types.ObjectId,
-        ref: "user"
+        type: String
     },
     cantidad:{type: Number},
     log:{type: String},
