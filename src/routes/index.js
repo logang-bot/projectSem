@@ -36,11 +36,12 @@ router.delete('/menu/delete/:id',menu.delete)
 //user
 router.get('/orden/listcart',orden.index)
 router.post('/orden/cart/:idMenu',auth, orden.cart)
-/*router.put('/orden/edit/:id', orden.edit)
+router.put('/orden/edit/:id', orden.edit)
+/*
 router.delete('/orden/delete/:id', orden.delete)
-router.put('/orden/create/:id', orden.create)
+router.put('/orden/create/:id', orden.create)*/
 router.get('/orden/list',auth, orden.ord)
-router.get('/orden/listwait',auth, orden.wait)
+/*router.get('/orden/listwait',auth, orden.wait)
 router.put('/orden/confirmrec',auth, orden.confrec)
 //owner
 router.get('/orden/ow/listall', orden.owall)
