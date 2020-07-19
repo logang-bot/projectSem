@@ -2,7 +2,7 @@ const ctrl = {}
 const {orden, menu, restaurant} = require('../models')
 
 ctrl.index = async (req,res)=>{
-    const ords = await orden.find({iduser: req.idUser, estado: "0"}) 
+    const ords = await orden.find({iduser: req.userId, estado: "0"}) 
     res.status(200).json(ords)
 }
 
@@ -21,7 +21,8 @@ ctrl.test = async (req,res)=>{
 }
 
 ctrl.cart = async (req, res) => {
-    const idUser = req.idUser
+    const idUser = req.userId
+    console.log(req.idUser)
     const neworden = new orden(req.body)
     const errors = []
     if (!neworden.cantidad || neworden.cantidad <= 0) errors.push({ error: "la cantidad debe ser mayor a cero" })
@@ -39,6 +40,7 @@ ctrl.cart = async (req, res) => {
             const total = parseFloat(men.precio) * parseFloat(neworden.cantidad)
             neworden.pagoTotal = total
             neworden.iduser = idUser
+            console.log(neworden.iduser +" "+ idUser)
             men.cantidad_por_dia -= neworden.cantidad
             await neworden.save()
             await men.save()
