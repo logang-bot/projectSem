@@ -1,5 +1,6 @@
 const ctrl = {}
 const {orden, menu} = require('../models')
+const { findById } = require('../models/user')
 
 ctrl.index = (req,res)=>{
 
@@ -28,5 +29,28 @@ ctrl.cart = async (req, res) => {
             res.send('agregado al carrito correctamente')
         }
     }
+}
+
+ctrl.delete = async (req,res)=>{
+    const idOrden = req.params.id
+    const deleteOrden= await orden.findByIdAndDelete(idOrden)
+    if(!deleteOrden)
+        return res.status(400).json({message: "el pedido que intenta eliminar no existe en el carrito"})
+    res.status(400).json({message: "la eliminacion ha sido exitosa exitosa"})
+}
+ctrl.create = async (req,res)=>{
+    const idOrden= req.params.id
+    const findOrden = await findById(idOrden)
+    if(!findOrden)
+        return res.status(400).json({message: "el pedido no existe"})
+    else{
+        const ChangeOrden = await orden.findByIdAndUpdate(idOrden, {estado: 1})
+        if (!ChangeOrden)
+            return res.status(500).json({message: "ha ocurrido un error en el servidor"})
+        else 
+            res.send(findOrden)
+            res.status(200).json({message: "su pedido ha sido enviado correctamente"})
+    }
+   
 }
 module.exports = ctrl
