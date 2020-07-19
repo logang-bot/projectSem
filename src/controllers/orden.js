@@ -34,14 +34,14 @@ ctrl.cart = async (req, res) => {
     }
 }
 
-ctrl.delete = async (req,res)=>{
+ctrl.delete = async (req,res)=>{ //N
     const idOrden = req.params.id
     const deleteOrden= await orden.findByIdAndDelete(idOrden)
     if(!deleteOrden)
         return res.status(400).json({message: "el pedido que intenta eliminar no existe en el carrito"})
     res.status(400).json({message: "la eliminacion ha sido exitosa exitosa"})
 }
-ctrl.create = async (req,res)=>{
+ctrl.create = async (req,res)=>{ //N
     const idOrden= req.params.id
     const findOrden = await findById(idOrden)
     if(!findOrden)
@@ -55,6 +55,28 @@ ctrl.create = async (req,res)=>{
             res.status(200).json({message: "su pedido ha sido enviado correctamente"})
     }
 }  
+ctrl.owres = async (req,res) =>{ //N
+    const idRes = req.params.id
+
+}
+ctrl.owtoproc = async (req,res) => { //N
+    const idOrden= req.params.id
+    const findOrden = await findById(idOrden)
+    if(!findOrden)
+        return res.status(400).json({message: "la orden no existe"})
+    else{
+        const ChangeOrden = await orden.findByIdAndUpdate(idOrden, {estado: 2})
+        if (!ChangeOrden)
+            return res.status(500).json({message: "ha ocurrido un error en el servidor"})
+        else 
+            res.send(findOrden)
+            res.status(200).json({message: "su pedido ha pasado de estado espera a proceso correctamente "})
+    }
+}
+
+ctrl.owdeliv = async (req,res) => {
+
+}
 ctrl.wait = async (req,res)=>{
     const ords = await orden.find({iduser: req.userId, estado: 2})
     res.status(200).json(ords)

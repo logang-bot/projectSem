@@ -39,19 +39,17 @@ router.post('/orden/cart/:idMenu',auth, orden.cart)
 router.get('/orden/listwait',auth, orden.wait)
 router.put('/orden/confirmrec',auth, orden.confrec)
 router.put('/orden/ow/tosend',auth, orden.owtosend)
-/*router.put('/orden/edit/:id', orden.edit)
-router.delete('/orden/delete/:id', orden.delete)
-router.put('/orden/create/:id', orden.create)
-router.get('/orden/list',auth, orden.ord)
-router.get('/orden/listwait',auth, orden.wait)
-router.put('/orden/confirmrec',auth, orden.confrec)
+//router.put('/orden/edit/:id', orden.edit)
+router.delete('/orden/delete/:id', orden.delete) //n
+router.put('/orden/create/:id', orden.create)//n
+//router.get('/orden/list',auth, orden.ord)
+
 //owner
-router.get('/orden/ow/listall', orden.owall)
-router.get('/orden/ow/listres', orden.owres)
-router.get('/orden/ow/listmen', orden.owmen)
-router.put('/orden/ow/toproc', orden.owtoproc)
-router.put('/orden/ow/tosend', orden.owtosend)
-router.get('/orden/ow/listsend', orden.owsend)
-router.get('/orden/ow/listdeliv', orden.owdeliv)*/
+//router.get('/orden/ow/listall', orden.owall)
+router.get('/orden/ow/listres', orden.owres) //n
+//router.get('/orden/ow/listmen', orden.owmen)
+router.put('/orden/ow/toproc/:id', orden.owtoproc) //n
+//router.get('/orden/ow/listsend', orden.owsend)
+router.get('/orden/ow/listdeliv', orden.owdeliv) //n
 
 module.exports = router
