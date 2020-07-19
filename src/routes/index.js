@@ -16,7 +16,6 @@ router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
 
 
-
 //rutas para restaurant
 
 router.get('/res',restaurant.index)
@@ -34,22 +33,23 @@ router.delete('/menu/delete/:id',menu.delete)
 
 //rutas para orden
 //user
-router.get('/orden/listcart',auth, orden.index)
-router.post('/orden/cart/:idMenu',auth, orden.cart)
-router.get('/orden/listwait',auth, orden.wait)
-router.put('/orden/confirmrec',auth, orden.confrec)
-router.put('/orden/ow/tosend',auth, orden.owtosend)
-//router.put('/orden/edit/:id', orden.edit)
-router.delete('/orden/delete/:id', orden.delete) //n
-router.put('/orden/create/:id', orden.create)//n
-//router.get('/orden/list',auth, orden.ord)
+router.get('/orden/listcart',auth, orden.index) //listar pedidos G
+router.post('/orden/cart/:idMenu',auth, orden.cart) //creacion pedido G
+//router.put('/orden/edit/:id', orden.edit) // actua pedido R
+router.delete('/orden/delete/:id', orden.delete) //Eliminar pedido N
+router.put('/orden/create/:id', orden.create)//confirmar orden N
+//router.get('/orden/list',auth, orden.ord) // listar ordenes R
+router.get('/orden/listwait',auth, orden.wait) //listar en espera por usuario G
+router.put('/orden/confirmrec',auth, orden.confrec) // confirmar recepcion G
+//                              OWNER    
 
-//owner
-//router.get('/orden/ow/listall', orden.owall)
-router.get('/orden/ow/listres', orden.owres) //n
-//router.get('/orden/ow/listmen', orden.owmen)
-router.put('/orden/ow/toproc/:id', orden.owtoproc) //n
-//router.get('/orden/ow/listsend', orden.owsend)
-router.get('/orden/ow/listdeliv', orden.owdeliv) //n
+//router.get('/orden/ow/listall', orden.owall) // listar ordenes solicitadas por usuario (dueño) R
+router.get('/orden/ow/listres/:idRes', orden.owres) //listar ordenes solicitadas por restaurant (dueño) N g
+//router.get('/orden/ow/listmen', orden.owmen) // ]listar ordenes solicitadas por menu (dueño) R
+router.put('/orden/ow/toproc/:id', orden.owtoproc) //cambiar de estado espera a proceso N
+router.put('/orden/ow/tosend',auth, orden.owtosend) //cambiar de estado proceso a enviado G
+//router.get('/orden/ow/listsend', orden.owsend) //listar ordenes enviadas por usuario (dueño) R
+router.get('/orden/ow/listdeliv', auth, orden.owdeliv) //  listar ordenes entregadas por usuario (dueño)N g
+
 
 module.exports = router

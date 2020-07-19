@@ -32,12 +32,12 @@
 
         OWNER
     []listar ordenes solicitadas por usuario (dueño) R
-    []listar ordenes solicitadas por restaurant (dueño) N
+    []listar ordenes solicitadas por restaurant (dueño) N g
     []listar ordenes solicitadas por menu (dueño) R
     []cambiar de estado espera a proceso N
     []cambiar de estado proceso a enviado G
     []listar ordenes enviadas por usuario (dueño) R
-    []listar ordenes entregadas por usuario (dueño)N
+    []listar ordenes entregadas por usuario (dueño)N g
 
     
     pedido 0, espera 1, proceso 2, enviado 3, recibido 4

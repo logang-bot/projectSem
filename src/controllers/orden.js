@@ -1,10 +1,25 @@
 const ctrl = {}
-const {orden, menu} = require('../models')
+
 const { findById } = require('../models/user')
+const {orden, menu, restaurant} = require('../models')
 
 ctrl.index = async (req,res)=>{
     const ords = await orden.find({iduser: req.idUser, estado: "0"}) 
     res.status(200).json(ords)
+}
+
+ctrl.owres = async (req,res)=>{
+    const {idRes} = req.params
+    const menus  = await menu.find({id_rest: idRes}, {nombre: 0, foto:0, contador:0, precio:0, descripcion:0,fechareg:0})
+    /*let k = 0
+    console.log(menus[k].id)*/
+    const orders = []
+    let i = 0
+    for(i=0; i<menus.length; i++){
+        const or = await orden.find({idmenu: menus[i].id})
+        if(or.length>0) orders.push(or)
+    }
+    res.send(orders)
 }
 
 ctrl.cart = async (req, res) => {
@@ -55,10 +70,7 @@ ctrl.create = async (req,res)=>{ //N
             res.status(200).json({message: "su pedido ha sido enviado correctamente"})
     }
 }  
-ctrl.owres = async (req,res) =>{ //N
-    const idRes = req.params.id
 
-}
 ctrl.owtoproc = async (req,res) => { //N
     const idOrden= req.params.id
     const findOrden = await findById(idOrden)
@@ -75,7 +87,29 @@ ctrl.owtoproc = async (req,res) => { //N
 }
 
 ctrl.owdeliv = async (req,res) => {
-
+    const idUser = req.userId
+    const restt = await restaurant.find({propietario : idUser})
+    let menus =[]
+    for(let i=0; i<restt.length; i++){
+        const me = await menu.find({id_rest: restt[i].id})
+        if(me.length>0) {
+            for (let k=0; k<me.length ;k++){
+                menus.push(me[k])
+            }
+        }
+            
+    }
+    console.log(menus)
+    const orders = []
+    for(let i=0; i<menus.length; i++){
+        const or = await orden.find({idmenu: menus[i].id , estado : 0})
+        if(or.length>0) {
+            for (let k=0; k<or.length ;k++)
+                orders.push(or[k])
+        }
+            
+    }
+    res.send(orders)
 }
 ctrl.wait = async (req,res)=>{
     const ords = await orden.find({iduser: req.userId, estado: 2})
