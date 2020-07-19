@@ -48,6 +48,36 @@ ctrl.cart = async (req, res) => {
         }
     }
 }
+ctrl.edit = async (req, res) => {
+    const id = req.params.id
+    console.log(id)
+    var {cantidad, log, lat} = req.body;
+    if(!cantidad || !log || !lat){
+        return res.status(400).send({message: 'No se permite campos vacios'});
+    } 
+    else {
+        const oldorden=await orden.findById(id)
+        const menus=await menu.findById(oldorden.idmenu)
+        if (parseInt(cantidad) > menus.cantidad_por_dia) {
+            return res.status(400).json({ message: 'ya no hay esa cantidad de unidades disponibles ' })
+        }
+        else{
+        var{pagoTotal}=parseFloat(menus.precio) * parseFloat(cantidad)
+        await orden.findByIdAndUpdate(id,{cantidad,log,lat,pagoTotal})
+        return res.status(200).send({message: 'orden actualizada'});
+    }
+    }
+}
+ctrl.ord = async (req, res) => {
+    const ordenes = await orden.find({iduser: req.userId})
+    console.log(ordenes)
+    if (!ordenes)
+        return res.status(400).json ({message: "El usuario no realizo ninguna orden"});
+    else{
+        return res.status(200).json(ordenes)
+    }
+}
+
 
 ctrl.delete = async (req,res)=>{ //N
     const idOrden = req.params.id
