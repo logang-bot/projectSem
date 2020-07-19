@@ -77,7 +77,48 @@ ctrl.ord = async (req, res) => {
         return res.status(200).json(ordenes)
     }
 }
-
+//[]listar ordenes solicitadas por usuario (dueño)
+ctrl.owall = async (req, res) => {
+    var id = req.userId;
+    console.log(req.userId)
+    const ordenes = []
+    rests = await restaurant.find({ propietario: id })
+    //console.log(rests)
+    if (!rests) {
+        return res.status(400).json({ message: "Ud no tiene restaurantes registrados" });
+    } else {
+        let i = 0
+        for (i = 0; i < rests.length; i++) {
+            const menus= await menu.find({ id_rest: rests[i].id})
+            let j=0
+            if(menus){
+            for (j = 0; j < menus.length; j++) {
+                const ord= await orden.find({ idmenu: menus[i].id})
+                ordenes.push(ord);
+            }
+        }}
+        return res.status(400).send(ordenes)
+    }
+}
+ctrl.owmen = async (req, res) => {
+    var id = req.params.id;
+    console.log(id)
+    const ordenes = await orden.find({ idmenu: id})
+    if(!ordenes)
+        return res.status(400).send("No existen ordenes de este menu")
+    else{
+        return res.status(200).send(ordenes)
+    }
+}
+ctrl.owsend = async (req, res) => {
+    var id = req.params.id;
+    const ordenes = await orden.find({ iduser: id})
+    if(!ordenes)
+        return res.status(200).send("No existen ordenes de este usuario")
+    else{
+        return res.status(200).send(ordenes)
+    }
+}
 
 ctrl.wait = async (req,res)=>{
     const ords = await orden.find({iduser: req.userId, estado: 2})
