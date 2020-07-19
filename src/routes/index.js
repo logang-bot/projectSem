@@ -34,10 +34,14 @@ router.delete('/menu/delete/:id',menu.delete)
 
 //rutas para orden
 //user
-router.get('/orden/listcart',orden.index)
+router.get('/orden/listcart',auth, orden.index)
 router.post('/orden/cart/:idMenu',auth, orden.cart)
 router.put('/orden/edit/:id', orden.edit)
 /*
+router.get('/orden/listwait',auth, orden.wait)
+router.put('/orden/confirmrec',auth, orden.confrec)
+router.put('/orden/ow/tosend',auth, orden.owtosend)
+/*router.put('/orden/edit/:id', orden.edit)
 router.delete('/orden/delete/:id', orden.delete)
 router.put('/orden/create/:id', orden.create)*/
 router.get('/orden/list',auth, orden.ord)
