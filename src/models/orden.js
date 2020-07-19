@@ -11,7 +11,6 @@ const orden = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user"
     },
-
     cantidad:{type: Number},
     log:{type: String},
     lat:{type: String},
