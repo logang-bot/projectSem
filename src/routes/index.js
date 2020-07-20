@@ -15,9 +15,7 @@ router.post('/user/logIn',user.login)
 router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
 
-
 //rutas para restaurant
-
 router.get('/res',restaurant.index)
 router.get('/res/list',auth,restaurant.index2)
 router.post('/res/create',auth,restaurant.create)
