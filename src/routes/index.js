@@ -52,4 +52,5 @@ router.get('/orden/ow/listsend/:id', orden.owsend) //listar ordenes enviadas por
 router.get('/orden/ow/listdeliv', auth, orden.owdeliv) //  listar ordenes entregadas por usuario (dueño)N g
 
 
+
 module.exports = router
