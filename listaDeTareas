@@ -21,14 +21,16 @@
     [X]listar menu por restaurante N
 []CRUD  para orden
         USER    
-    []listar pedidos  (carrito)G
+    []listar pedidos  (carrito)G  ..completar
     []creacion de pedido (agregar al carrito)G
     []actualizacion de pedido (carrito) R
     []eliminar pedido (carrito) N
-    []confirmar orden (poner en modo espera) N
+    []confirmar orden (poner en modo espera) N   arreglar
     []listar ordenes por usuario R
     []listar en espera por usuario G
     []confirmar recepcion por parte de usuario G
+    []solicitar factura R
+    
 
         OWNER
     []listar ordenes solicitadas por usuario (dueño) R
@@ -44,8 +46,7 @@
     
 
 [x]proteccion de rutas con autenticacion JWT
-[]subida de archivos
-[]guardado de fotos en DB
+[]subida de archivos y guardado de fotos en DB 
 
 
 /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
