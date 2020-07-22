@@ -1,7 +1,7 @@
 const ctrl = {}
 
 const { findById } = require('../models/user')
-const { orden, menu, restaurant } = require('../models')
+const { orden, menu, restaurant, user} = require('../models')
 
 ctrl.index = async (req, res) => {
     const ords = await orden.find({ iduser: req.userId, estado: "0" })
@@ -199,5 +199,19 @@ ctrl.confrec = async (req, res) => {
 ctrl.owtosend = async (req, res) => {
     const { id } = req.params
     await orden.findByIdAndUpdate(id, { estado: 3 })
+}
+ctrl.fac = async (req, res) => {
+    const id = req.userId
+    var { namefac, cifac } = req.body;
+    if (!namefac || !cifac) {
+        return res.status(400).send({ message: 'No se permite campos vacios' });
+    } else {
+        if (!/^\d+[\-,a-zA-Z0-9]+[a-zA-Z0-9]+$/.test(cifac)) {
+            return res.status(400).send({ message: 'Verifique que el CI sea correcto' });
+        } else {
+            await user.findByIdAndUpdate(id, { namefac, cifac })
+            return res.status(200).send({ message: 'Se ingresaron los datos correctamente' });
+        }
+    }
 }
 module.exports = ctrl

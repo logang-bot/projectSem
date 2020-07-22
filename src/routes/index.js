@@ -39,6 +39,7 @@ router.put('/orden/create/:id', orden.create)//confirmar orden N
 router.get('/orden/list',auth, orden.ord) // listar ordenes R
 router.get('/orden/listwait',auth, orden.wait) //listar en espera por usuario G
 router.put('/orden/confirmrec',auth, orden.confrec) // confirmar recepcion G
+router.put('/orden/solicitarf',auth, orden.fac)// Solicitar factura R
 //                              OWNER    
 
 router.get('/orden/ow/listall',auth, orden.owall) // listar ordenes solicitadas por usuario (dueño) R
