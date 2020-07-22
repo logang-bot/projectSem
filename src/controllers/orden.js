@@ -1,6 +1,6 @@
 const ctrl = {}
 
-const { findById } = require('../models/user')
+const { findById, find, findOne } = require('../models/user')
 const { orden, menu, restaurant } = require('../models')
 
 ctrl.index = async (req, res) => {
@@ -130,19 +130,24 @@ ctrl.delete = async (req, res) => { //N
         return res.status(400).json({ message: "el pedido que intenta eliminar no existe en el carrito" })
     res.status(400).json({ message: "la eliminacion ha sido exitosa exitosa" })
 }
-ctrl.create = async (req, res) => { //N
-    const idOrden = req.params.id
-    const findOrden = await findById(idOrden)
-    if (!findOrden)
-        return res.status(400).json({ message: "el pedido no existe" })
-    else {
-        const ChangeOrden = await orden.findByIdAndUpdate(idOrden, { estado: 1 })
-        if (!ChangeOrden)
-            return res.status(500).json({ message: "ha ocurrido un error en el servidor" })
-        else
-            res.send(findOrden)
-        res.status(200).json({ message: "su pedido ha sido enviado correctamente" })
+ctrl.create = async (req, res) => { //N arreglar
+    const idRest = req.params.idRest
+    const iduser= req.userId
+    const b_menus = await menu.find({id_rest : idRest}) //buscar todos los menus de un restaurant
+    const buscarOrdenes = await orden.find({iduser: iduser})
+    let ordenesDeUnSoloRest = []
+    for (let i=0 ; i< buscarOrdenes.length ; i++){
+        for (let j=0 ; j<b_menus.length ; j++){
+            if (buscarOrdenes[i].idmenu == b_menus[j].id){
+                ordenesDeUnSoloRest.push(buscarOrdenes[i])
+                console.log("eeeeeee");
+            }
+        }
     }
+    for (let i= 0; i<ordenesDeUnSoloRest.length ; i++){
+        await ordenesDeUnSoloRest[i].update({estado: 1})
+    }   
+    res.send("los pedidos del restaurant han sido confirmados"+ordenesDeUnSoloRest)    
 }
 
 ctrl.owtoproc = async (req, res) => { //N

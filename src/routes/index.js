@@ -35,7 +35,7 @@ router.get('/orden/listcart',auth, orden.index) //listar pedidos G
 router.post('/orden/cart/:idMenu',auth, orden.cart) //creacion pedido G
 router.put('/orden/edit/:id', orden.edit) // actua pedido R
 router.delete('/orden/delete/:id', orden.delete) //Eliminar pedido N
-router.put('/orden/create/:id', orden.create)//confirmar orden N
+router.put('/orden/create/:idRest',auth, orden.create)//confirmar orden N
 router.get('/orden/list',auth, orden.ord) // listar ordenes R
 router.get('/orden/listwait',auth, orden.wait) //listar en espera por usuario G
 router.put('/orden/confirmrec',auth, orden.confrec) // confirmar recepcion G
