@@ -5,7 +5,50 @@ const { orden, menu, restaurant } = require('../models')
 
 ctrl.index = async (req, res) => {
     const ords = await orden.find({ iduser: req.userId, estado: "0" })
-    res.status(200).json(ords)
+    const menus  = []
+    for(let i=0; i< ords.length; i++){
+        const me = await menu.find({_id: ords[i].idmenu})
+        if(me.length>0){
+            for(let j=0;j<me.length;j++){
+                var pos = menus.map(function(e) { 
+                    return e.id; 
+                }).indexOf(me[j].id);
+                if(pos==-1)
+                    menus.push(me[j])
+            }
+        }
+    }
+    if (menus.length > 0) {
+        const rests = []
+        for (let i = 0; i < menus.length; i++) {
+            const aux = await restaurant.findOne({_id: menus[i].id_rest})
+            const testo = rests.includes({menu: menus[i].id, rest: aux.id})
+            if(!testo) rests.push({menu: menus[i].id, rest: aux.id})
+        }
+        console.log(rests)
+        const cartords = []
+        var flag = rests[0].rest
+        var temp = []
+        for (let i = 0; i < rests.length; i++) {
+            if (flag == rests[i].rest) {
+                const aux2 = await orden.find({idmenu: rests[i].menu})
+                for (let j = 0; j < aux2.length; j++) {
+                    temp.push(aux2[j])
+                }
+            }
+            else{
+                cartords.push(temp)
+                temp = []
+                flag = rests[i].rest
+                i--
+            }
+        }
+        cartords.push(temp)
+        res.send(cartords)
+    }
+    else {
+        res.status(200).json({ message: 'carrito vacio', data: menus })
+    }
 }
 
 ctrl.owres = async (req, res) => {
