@@ -46,10 +46,14 @@ ctrl.signUp = async (req,res)=> {
 ctrl.login = async (req,res)=>{
     const {email, password} = req.body
     const userr = await user.findOne({email:email})
-    if (!userr) return res.send('el usuario no esta registrado')
+    if (!userr) return res.send({
+        message: "el usuario no existe"
+    })
     const pass = await userr.match(password)
     //console.log(pass)
-    if(!pass) return res.send('la contraseña es incorrecta')
+    if(!pass) return res.send({
+        message: "el password es incorrecto"
+    })
     token = createToken(userr.id)
     res.send({
         message: "estas logueado",

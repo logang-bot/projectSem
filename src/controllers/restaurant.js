@@ -1,5 +1,6 @@
 const ctrl = {}
 const { user, restaurant } = require('../models')
+const saveimage = require('../controllers/image')
 
 ctrl.index = async (req, res) => {
     const rests = await restaurant.find({})
@@ -31,6 +32,18 @@ ctrl.create = async (req, res) => {
         newresta.telefono = telefono;
         newresta.log = log;
         newresta.lat = lat;
+
+
+        const img = await saveimage.cre(req,res)
+        if(img == "fail"){
+            res.send('el formato no es valido')
+            return
+        }
+        else newresta.logo = img
+        console.log("fghimg is" + img)
+
+
+
         await newresta.save((err, restsaved) => {
             if (err)
                 return res.status(500).send({ message: `Error en el servidor ${err}` });
