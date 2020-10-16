@@ -12,9 +12,7 @@ require('../config/passport')
 app.set('port', process.env.PORT || 8000)
 app.use(morgan('dev'))
 
-app.use(multer({
-    dest: path.join(__dirname, '../public/upload/temp')
-}).single('img'))
+app.use('/public', express.static(path.join(__dirname, '../public')))
 
 app.use(express.urlencoded({extended: false}))
 app.use(session({

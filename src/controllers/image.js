@@ -5,7 +5,18 @@ const path = require('path')
 
 const ctrl={}
 
+//test
 async function get(req,res){
+    var params = req.params
+    if(!params)return res.send('es necesario un id')
+    var {id} = params
+    var gimg = await Image.findOne({filename: {$regex: req.params.id}})
+    if(gimg) return res.sendFile(gimg.path)
+    res.send('error en la peticion')
+}
+//test
+
+/*async function getCurrent(req,res){
     const image = await imagen.findOne({filename: {$regex: req.params.imgid}})
     if(image){
         res.send(image.filename)
@@ -14,33 +25,33 @@ async function get(req,res){
     else{
         return "error"
     }
-}
+}*/
 
-async function cre (req,res){
-    const save = async () =>{
+async function cre(req, res) {
+    const save = async () => {
         var err = ""
-        if (req.file != null) {
+        if (req.files != null) {
             const imgurl = random()
             const images = await imagen.find({ filename: { $regex: imgurl } })
-            if (images.length > 0) {
-                save()
-            }
+            if (images.length > 0) save()
             else {
-                console.log(imgurl)
-                const ext = path.extname(req.file.originalname).toLowerCase()
-                const imgtmp = req.file.path
-                const imgtarg = path.resolve(`src/public/upload/${imgurl}${ext}`)
-
+                //console.log(ran)
+                const imagee = req.files.img
+                //imagee.tempFilePath = path
+                //console.log(imagee)
+                const ext = path.extname(imagee.name)
+                const targetPath = path.join(__dirname, `../public/upload/${imgurl}${ext}`)
+                console.log(targetPath)
                 if (ext === '.png' || ext === '.jpg' || ext === '.jpeg') {
-                    await fs.rename(imgtmp, imgtarg)
+                    await imagee.mv(targetPath)
                     const newimg = new imagen({
+                        path: targetPath,
                         filename: imgurl + ext,
                     })
                     const imgsav = await newimg.save()
                     err = imgsav.filename
                 }
                 else {
-                    await fs.unlink(imgtmp)
                     err = "fail"
                 }
             }

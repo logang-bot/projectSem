@@ -1,6 +1,11 @@
 const router  = require('express').Router()
 const {user, restaurant, menu, orden} = require('../controllers')
 const auth = require('../helpers/auth')
+const fileupload = require('express-fileupload')
+
+router.use(fileupload({
+    fileSize: 50*1024*1024
+}))
 
 router.get('/', auth, (req,res)=>{
     if(req.user) console.log(req.user.id)

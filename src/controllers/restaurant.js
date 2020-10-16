@@ -33,14 +33,14 @@ ctrl.create = async (req, res) => {
         newresta.log = log;
         newresta.lat = lat;
 
-        
+
         const img = await saveimage.cre(req,res)
         if(img == "fail"){
             res.send('el formato no es valido')
             return
         }
         else newresta.logo = img
-        console.log(img)
+        console.log("fghimg is" + img)
 
 
 

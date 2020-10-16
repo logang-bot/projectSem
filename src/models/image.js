@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const path  = require('path')
 
 const imgSchema= new Schema({
+    path: String,
     filename: {type:String},
     timestamp: {type: Date, default: Date.now}
 })
