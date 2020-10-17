@@ -1,7 +1,8 @@
 const router  = require('express').Router()
-const {user, restaurant, menu, orden} = require('../controllers')
+const {user, restaurant, menu, orden, imagen} = require('../controllers')
 const auth = require('../helpers/auth')
 const fileupload = require('express-fileupload')
+const image = require('../models/image')
 
 router.use(fileupload({
     fileSize: 50*1024*1024
@@ -13,8 +14,12 @@ router.get('/', auth, (req,res)=>{
     res.send('que pex')
 })
 
+//rutas prueba imagen
+router.get('/img/:id', imagen.get)
+
+
 //rutas para usuario
-router.get('/user',user.index),
+router.get('/user',user.index)
 router.post('/user/signUp',user.signUp)
 router.post('/user/logIn',user.login)
 router.put('/user/edit',auth ,user.edit)

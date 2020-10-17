@@ -7,10 +7,14 @@ const ctrl={}
 
 //test
 async function get(req,res){
+    //console.log(req.params)
+    /*const allimages = await imagen.find({})
+    return res.send(allimages)*/
     var params = req.params
     if(!params)return res.send('es necesario un id')
     var {id} = params
-    var gimg = await Image.findOne({filename: {$regex: req.params.id}})
+    //return res.send(id)
+    var gimg = await imagen.findOne({filename: {$regex: req.params.id}})
     if(gimg) return res.sendFile(gimg.path)
     res.send('error en la peticion')
 }
