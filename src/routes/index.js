@@ -24,6 +24,7 @@ router.post('/user/signUp',user.signUp)
 router.post('/user/logIn',user.login)
 router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
+router.get('/user/mydata', auth, user.mydata)
 
 //rutas para restaurant
 router.get('/res',restaurant.index)

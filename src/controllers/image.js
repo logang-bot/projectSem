@@ -45,15 +45,17 @@ async function cre(req, res) {
                 //console.log(imagee)
                 const ext = path.extname(imagee.name)
                 const targetPath = path.join(__dirname, `../public/upload/${imgurl}${ext}`)
+                const relpath = "img/" + imgurl + ext
                 console.log(targetPath)
                 if (ext === '.png' || ext === '.jpg' || ext === '.jpeg') {
                     await imagee.mv(targetPath)
                     const newimg = new imagen({
                         path: targetPath,
+                        relativepath: relpath,
                         filename: imgurl + ext,
                     })
                     const imgsav = await newimg.save()
-                    err = imgsav.filename
+                    err = imgsav.relativepath
                 }
                 else {
                     err = "fail"
