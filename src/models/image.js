@@ -4,6 +4,7 @@ const path  = require('path')
 
 const imgSchema= new Schema({
     path: String,
+    relativepath: String,
     filename: {type:String},
     timestamp: {type: Date, default: Date.now}
 })

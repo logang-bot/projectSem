@@ -2,6 +2,7 @@ const ctrl = {}
 const {user} = require('../models')
 const passport = require('passport')
 const {createToken} = require('../helpers/serviceToken')
+const saveimage = require('../controllers/image')
 
 ctrl.index = async (req,res)=>{
     const users = await user.find({})
@@ -10,7 +11,7 @@ ctrl.index = async (req,res)=>{
 ctrl.signUp = async (req,res)=> {
     var usuario= new user
     //console.log(req.body)
-    var {name,email,password,confirm_password} = req.body 
+    var {name,email,password,confirm_password, avatar} = req.body 
 
     if(name && email && password){  
         const useremail= await user.findOne({email: email}) //no olvidar el await 
@@ -21,7 +22,17 @@ ctrl.signUp = async (req,res)=> {
             return res.status(400).json({message: "las constraseñas no coinciden :/"})
         usuario.name = name;
         usuario.email = email;
-        usuario.password = await usuario.encrypt(password); 
+        usuario.password = await usuario.encrypt(password);
+
+        const img = await saveimage.cre(req,res)
+        if(img == "fail"){
+            res.send('el formato no es valido')
+            return
+        }
+        else usuario.avatar = img
+        //console.log("fghimg is" + img)
+
+
         console.log(usuario)
         await usuario.save((err, usersaved) => {
             if(err) return res.status(500).send({message: `Error en el servidor ${err}`});
@@ -85,6 +96,13 @@ ctrl.delete = async (req,res)=>{
     await user.findByIdAndDelete(req.userId)
     res.send('el usuario fue eliminado exitosamente')
 }
+
+ctrl.mydata = async (req,res)=>{
+    console.log(req.userId)
+    const userr = await user.findById(req.userId)
+    res.status(200).json(userr)
+}
+
 /*ctrl.logIn = passport.authenticate('local',{
     successRedirect: '/',
     failureRedirect: '/',

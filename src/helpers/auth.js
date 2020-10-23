@@ -5,6 +5,7 @@ const config = require('../config/config')
 function auth(req,res,next){
     const token = req.headers['x-access-token']
     if(!token){
+        console.log("falta un token")
         return res.status(401).json({message: "falta un token"})
     }
     try {

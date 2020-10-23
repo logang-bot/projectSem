@@ -1,0 +1,45 @@
+pagina login [x] G
+pagina registro y bienvenida[] N
+pagina principal [X] depends on Home G
+
+RESTAURANTE
+    [x]creacion de restaurantes por usuario N
+    [X]actualizacion de restaurantes N   
+        [x]eliminar restaurantes R  
+    [x]cambio de dueño de Restaurante G
+    [x]listar restaurantes por usuario R
+    [x]listar todos los restaurantes G
+        fragment home
+
+MENUS
+    [X]creacion de menu por restaurante G
+    [X]actualizacion de menu R
+        [X]eliminar menu N
+    [X]listar menu por restaurante N
+    [] listar menus populares R
+        fragment more
+
+ORDEN
+        USER    
+    []listar pedidos  (carrito)G  ..completar
+    []creacion de pedido (agregar al carrito)G
+    []actualizacion de pedido (carrito) R
+        []eliminar pedido (carrito) N
+        []confirmar orden (poner en modo espera) N   arreglar
+    []listar ordenes por usuario R
+    []listar en espera por usuario G
+        []confirmar recepcion por parte de usuario G
+    (beta)[]solicitar factura R
+    
+
+        OWNER
+    []listar ordenes solicitadas por usuario (dueño) R
+    []listar ordenes solicitadas por restaurant (dueño) N g
+    []listar ordenes solicitadas por menu (dueño) R
+        []cambiar de estado espera a proceso N
+        []cambiar de estado proceso a enviado G
+    []listar ordenes enviadas por usuario (dueño) R
+    []listar ordenes entregadas por usuario (dueño)N g
+
+
+
