@@ -112,5 +112,97 @@ ctrl.delete = async (req, res) => {
     res.send('El restaurant fue eliminado exitosamente')
 }
 
+ctrl.setlugar = async (req,res)=>{
+    const { id } = req.params
+    const restt = await restaurant.findById(id)
+    const userr = await user.findById(req.userId)
+    if (restt.propietario == userr.id) {
+        const img = await saveimage.cre(req, res)
+        if (img == "fail") {
+            res.send("el formato no es valido")
+        } else if (img == "") res.send('debe subir un archivo')
+        else {
+            await restaurant.findByIdAndUpdate(id, { foto: img })
+            console.log('foto del lugar agregada')
+            res.send('Foto del lugar agregada')
+        }
+    }
+    else {
+        console.log(restt.idPropietario)
+        console.log(userr._id)
+        res.send('no eres el propietario actual de este negocio')
+    }
+}
+
+ctrl.setlogo = async (req,res)=>{
+    const {id} = req.params
+    const img = await saveimage.cre(req, res)
+    if(img == "fail"){
+        res.send("el formato no es valido")
+    }else if (img == "") res.send('debe subir un archivo')
+    else {
+        await restaurant.findByIdAndUpdate(id, {Logo: img})
+        res.send('Logo actualizado')
+    }
+}
+/*
+ctrl.lugar = async (req,res) => {
+    const { id } = req.params
+    const restt = await restaurant.findById(id)
+    const userr = await user.findById(req.user.id)
+    if (restt.idPropietario._id.equals(userr._id)) {
+        const img = await saveimage.cre(req, res)
+        if (img == "fail") {
+            res.send("el formato no es valido")
+        } else if (img == "") res.send('debe subir un archivo')
+        else {
+            await restaurant.findByIdAndUpdate(id, { FotoLugar: img })
+            console.log('foto del lugar agregada')
+            res.send('Foto del lugar agregada')
+        }
+    }
+    else {
+        console.log(restt.idPropietario)
+        console.log(userr._id)
+        res.send('no eres el propietario actual de este negocio')
+    }
+    
+}
+
+ctrl.editLogo = async (req,res)=>{
+    const {id} = req.params
+    const img = await saveimage.cre(req, res)
+    if(img == "fail"){
+        res.send("el formato no es valido")
+    }else if (img == "") res.send('debe subir un archivo')
+    else {
+        await restaurant.findByIdAndUpdate(id, {Logo: img})
+        res.send('Logo actualizado')
+    }
+}
+
+ctrl.editFotoLugar = async (req,res)=>{
+    const {id} = req.params
+    const img = await saveimage.cre(req, res)
+    if(img == "fail"){
+        res.send("el formato no es valido")
+    }else if (img == "") res.send('debe subir un archivo')
+    else {
+        await restaurant.findByIdAndUpdate(id, {FotoLugar: img})
+        res.send('Foto del lugar actualizado')
+    }
+}*/
+
+ctrl.delLogo = async (req,res)=>{
+    const {id} = req.params
+    await restaurant.findByIdAndUpdate(id, {Logo: ""})
+    res.send('Logo eliminado')
+}
+
+ctrl.delFotoLugar = async (req,res)=>{
+    const {id} = req.params
+    await restaurant.findByIdAndUpdate(id, {FotoLugar: ""})
+    res.send('Foto del lugar eliminado')
+}
 
 module.exports = ctrl

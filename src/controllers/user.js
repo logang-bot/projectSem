@@ -12,44 +12,55 @@ ctrl.signUp = async (req,res)=> {
     var usuario= new user
     //console.log(req.body)
     var {name,email,password,confirm_password, avatar} = req.body 
-
+    const users = new user(req.body)
+    console.log(users)
     if(name && email && password){  
         const useremail= await user.findOne({email: email}) //no olvidar el await 
         console.log(useremail)
-        if (useremail)
-           return res.status(400).json({message: "el email ya esta en uso, ingrese otro diferente"})
-        if(password != confirm_password)
-            return res.status(400).json({message: "las constraseñas no coinciden :/"})
+        if (useremail){
+            console.log("el email ya esta en uso, ingrese otro diferente")
+            return res.send({message: "el email ya esta en uso, ingrese otro diferente", token: "---"})
+        }
+           
+        if(password != confirm_password){
+            console.log("las constraseñas no coinciden :/")
+            return res.send({message: "las contraseñas no coinciden :/"})
+        }
         usuario.name = name;
         usuario.email = email;
         usuario.password = await usuario.encrypt(password);
 
         const img = await saveimage.cre(req,res)
         if(img == "fail"){
+            console.log('el formato no es valido')
             res.send('el formato no es valido')
             return
         }
         else usuario.avatar = img
         //console.log("fghimg is" + img)
-
-
-        console.log(usuario)
+        //console.log(usuario)
         await usuario.save((err, usersaved) => {
-            if(err) return res.status(500).send({message: `Error en el servidor ${err}`});
+            if(err) {
+                console.log("Error en el servidor")
+                return res.send({message: `Error en el servidor ${err}`});
+            }
             if(usersaved){
                 token = createToken(usersaved.id)
-                res.status(200).send({
-                usuario: usersaved,
-                token: token 
-            });
+                console.log(usersaved+" registrado")
+                res.send({
+                    message: "sugoi",
+                    token: token
+                });
             }else{
-                return res.status(500).send({
+                console.log("no se ha guardado el usuario")
+                return res.send({
                     message: 'No se ha guardado el usuario'
                 });
             } 
         });
     }else{
-        return res.status(400).send({
+        console.log("campos vacios"+ name + email + password)
+        return res.send({
             message: 'uno o mas campos estan vacios'
         });
     }

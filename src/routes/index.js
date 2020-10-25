@@ -33,6 +33,14 @@ router.post('/res/create',auth,restaurant.create)
 router.put('/res/edit/:id',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)
 router.delete('/res/delete/:id',restaurant.delete)
+    //rutas para imagen
+router.post('/res/setcover/:id', auth, restaurant.setlugar)
+router.post('/res/setlogo/:id', auth, restaurant.setlogo)
+/*router.put('/res/fotolugar/:id', auth, restaurant.lugar)
+router.put('/res/edlogo/:id', auth, restaurant.editLogo)
+router.put('/res/edfoto/:id', auth, restaurant.editFotoLugar)*/
+router.put('/res/dellogo/:id', auth, restaurant.delLogo)
+router.put('/res/delfoto/:id', auth, restaurant.delFotoLugar)
 
 //rutas para menu
 router.get('/menu/:idRes',menu.index)

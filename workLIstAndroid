@@ -6,7 +6,7 @@ RESTAURANTE
     [x]creacion de restaurantes por usuario N
     [X]actualizacion de restaurantes N   
         [x]eliminar restaurantes R  
-    [x]cambio de dueño de Restaurante G
+    ///[x]cambio de dueño de Restaurante G
     [x]listar restaurantes por usuario R
     [x]listar todos los restaurantes G
         fragment home
