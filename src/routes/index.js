@@ -44,8 +44,8 @@ router.put('/res/delfoto', auth, restaurant.delFotoLugar)  // REQ ID RESTAURANT
 router.get('/res/mydata', auth, restaurant.mydata) 
 
 //rutas para menu
-router.get('/menu/:idRes',menu.index)   // QUERY ID RESTAURANT ON MENU
-router.post('/menu/create/',menu.create)  // QUERY ID RESTAURANY ON MENU
+router.get('/menu',menu.index)   // QUERY ID RESTAURANT ON MENU
+router.post('/menu/create',menu.create)  // QUERY ID RESTAURANY ON MENU
 router.put('/menu/edit',menu.edit) // QUERY ID MENU
 router.delete('/menu/delete',menu.delete)  // QUERY ID MENU
 
