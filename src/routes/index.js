@@ -33,6 +33,7 @@ router.post('/res/create',auth,restaurant.create)
 router.put('/res/edit/:id',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)
 router.delete('/res/delete/:id',restaurant.delete)
+router.get('/res/mydata', auth, restaurant.mydata)
 
 //rutas para menu
 router.get('/menu/:idRes',menu.index)

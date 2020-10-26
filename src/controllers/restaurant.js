@@ -112,5 +112,12 @@ ctrl.delete = async (req, res) => {
     res.send('El restaurant fue eliminado exitosamente')
 }
 
+ctrl.mydata = async (req,res) => {
+    console.log(req.query)
+    const idRes =req.query.id
+    const rest = await restaurant.findById(idRes)
+    res.status(200).json(rest)
+}
+
 
 module.exports = ctrl
