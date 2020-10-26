@@ -30,9 +30,9 @@ router.get('/user/mydata', auth, user.mydata)
 router.get('/res',restaurant.index)
 router.get('/res/list',auth,restaurant.index2)
 router.post('/res/create',auth,restaurant.create)
-router.put('/res/edit/:id',restaurant.edit)
-router.patch('/res/chang/:id',auth, restaurant.change)
-router.delete('/res/delete/:id',restaurant.delete)
+router.put('/res/edit',restaurant.edit)     // REQ ID RESTAURANT
+router.patch('/res/chang',auth, restaurant.change) // REQ ID RESTAURANT
+router.delete('/res/delete',restaurant.delete) // REQ ID RESTAURANT
     //rutas para imagen
 router.post('/res/setcover/:id', auth, restaurant.setlugar)
 router.post('/res/setlogo/:id', auth, restaurant.setlogo)
