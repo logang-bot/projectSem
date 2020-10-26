@@ -83,6 +83,24 @@ ctrl.login = async (req,res)=>{
     })
 }
 
+ctrl.edAvatar = async (req,res)=>{
+    const id = req.userId
+    //const userr = await user.findById(id)
+    const img = await saveimage.cre(req, res)
+    if(img == "fail"){
+        console.log("el formato no es")
+        res.send("el formato no es valido")
+    }else if (img == ""){
+        console.log("debe subir un archivo")
+        res.send('debe subir un archivo')
+    } 
+    else {
+        await user.findByIdAndUpdate(id, {avatar: img})
+        console.log("avatar actualizado")
+        res.send({message: "avatar actualizado"})
+    }
+}
+
 ctrl.edit = async (req, res) => {
     var id = req.userId;
     var datos = req.body;

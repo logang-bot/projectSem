@@ -141,7 +141,7 @@ ctrl.setlogo = async (req,res)=>{
         res.send("el formato no es valido")
     }else if (img == "") res.send('debe subir un archivo')
     else {
-        await restaurant.findByIdAndUpdate(id, {Logo: img})
+        await restaurant.findByIdAndUpdate(id, {logo: img})
         res.send('Logo actualizado')
     }
 }
@@ -195,13 +195,13 @@ ctrl.editFotoLugar = async (req,res)=>{
 
 ctrl.delLogo = async (req,res)=>{
     const {id} = req.params
-    await restaurant.findByIdAndUpdate(id, {Logo: ""})
+    await restaurant.findByIdAndUpdate(id, {logo: ""})
     res.send('Logo eliminado')
 }
 
 ctrl.delFotoLugar = async (req,res)=>{
     const {id} = req.params
-    await restaurant.findByIdAndUpdate(id, {FotoLugar: ""})
+    await restaurant.findByIdAndUpdate(id, {foto: ""})
     res.send('Foto del lugar eliminado')
 }
 
