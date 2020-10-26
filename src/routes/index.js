@@ -34,14 +34,14 @@ router.put('/res/edit',restaurant.edit)     // REQ ID RESTAURANT
 router.patch('/res/chang',auth, restaurant.change) // REQ ID RESTAURANT
 router.delete('/res/delete',restaurant.delete) // REQ ID RESTAURANT
     //rutas para imagen
-router.post('/res/setcover/:id', auth, restaurant.setlugar)
-router.post('/res/setlogo/:id', auth, restaurant.setlogo)
+router.post('/res/setcover', auth, restaurant.setlugar) // REQ ID RESTAURANT
+router.post('/res/setlogo', auth, restaurant.setlogo) // REQ ID RESTAURANT
 /*router.put('/res/fotolugar/:id', auth, restaurant.lugar)
 router.put('/res/edlogo/:id', auth, restaurant.editLogo)
 router.put('/res/edfoto/:id', auth, restaurant.editFotoLugar)*/
-router.put('/res/dellogo/:id', auth, restaurant.delLogo)
-router.put('/res/delfoto/:id', auth, restaurant.delFotoLugar)
-router.get('/res/mydata', auth, restaurant.mydata) //warning git
+router.put('/res/dellogo', auth, restaurant.delLogo)  // REQ ID RESTAURANT
+router.put('/res/delfoto', auth, restaurant.delFotoLugar)  // REQ ID RESTAURANT
+router.get('/res/mydata', auth, restaurant.mydata) 
 
 //rutas para menu
 router.get('/menu/:idRes',menu.index)
