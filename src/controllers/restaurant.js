@@ -66,7 +66,7 @@ ctrl.create = async (req, res) => {
     }
 }
 ctrl.edit = async (req, res) => {
-    const id = req.params.id
+    const id = req.query.id
     var { nombre, nit, calle, telefono, log, lat } = req.body
     if (nombre && nit && calle && telefono && log && lat) {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
@@ -86,7 +86,7 @@ ctrl.edit = async (req, res) => {
 }
 
 ctrl.change = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.query
     const email = req.body.email
     const newuser = await user.findOne({ email: email })
     const rest = await restaurant.findById(id)
@@ -107,13 +107,13 @@ ctrl.change = async (req, res) => {
 }
 
 ctrl.delete = async (req, res) => {
-    const id = req.params.id
+    const id = req.query.id
     await restaurant.findByIdAndDelete(id)
     res.send('El restaurant fue eliminado exitosamente')
 }
 
 ctrl.setlugar = async (req,res)=>{
-    const { id } = req.params
+    const { id } = req.query
     const restt = await restaurant.findById(id)
     const userr = await user.findById(req.userId)
     if (restt.propietario == userr.id) {
@@ -135,7 +135,7 @@ ctrl.setlugar = async (req,res)=>{
 }
 
 ctrl.setlogo = async (req,res)=>{
-    const {id} = req.params
+    const {id} = req.query
     const img = await saveimage.cre(req, res)
     if(img == "fail"){
         res.send("el formato no es valido")
@@ -194,13 +194,13 @@ ctrl.editFotoLugar = async (req,res)=>{
 }*/
 
 ctrl.delLogo = async (req,res)=>{
-    const {id} = req.params
+    const {id} = req.query
     await restaurant.findByIdAndUpdate(id, {logo: ""})
     res.send('Logo eliminado')
 }
 
 ctrl.delFotoLugar = async (req,res)=>{
-    const {id} = req.params
+    const {id} = req.query
     await restaurant.findByIdAndUpdate(id, {foto: ""})
     res.send('Foto del lugar eliminado')
 }

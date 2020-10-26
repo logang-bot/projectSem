@@ -52,7 +52,7 @@ ctrl.index = async (req, res) => {
 }
 
 ctrl.owres = async (req, res) => {
-    const { idRes } = req.params
+    const { idRes } = req.query
     const menus = await menu.find({ id_rest: idRes }, { nombre: 0, foto: 0, contador: 0, precio: 0, descripcion: 0, fechareg: 0 })
     /*let k = 0
     console.log(menus[k].id)*/
@@ -75,7 +75,7 @@ ctrl.cart = async (req, res) => {
     if (!neworden.lat) errors.push({ error: "la ubicacion es necesaria" })
     if (errors.length > 0) return res.status(400).json(errors)
     else {
-        const { idMenu } = req.params
+        const { idMenu } = req.query
         const men = await menu.findById(idMenu)
         if (parseInt(neworden.cantidad) > men.cantidad_por_dia) {
             return res.status(400).json({ message: 'ya no hay unidades disponibles por favor revise la cantidad de unidades existentes' })
@@ -94,7 +94,7 @@ ctrl.cart = async (req, res) => {
     }
 }
 ctrl.edit = async (req, res) => {
-    const id = req.params.id
+    const id = req.query.id
     console.log(id)
     var { cantidad, log, lat } = req.body;
     if (!cantidad || !log || !lat) {
@@ -147,7 +147,7 @@ ctrl.owall = async (req, res) => {
     }
 }
 ctrl.owmen = async (req, res) => {
-    var id = req.params.id;
+    var id = req.query.id;
     console.log(id)
     const ordenes = await orden.find({ idmenu: id })
     if (!ordenes)
@@ -157,7 +157,7 @@ ctrl.owmen = async (req, res) => {
     }
 }
 ctrl.owsend = async (req, res) => {
-    var id = req.params.id;
+    var id = req.querys.id;
     const ordenes = await orden.find({ iduser: id })
     if (!ordenes)
         return res.status(200).send("No existen ordenes de este usuario")
@@ -167,14 +167,14 @@ ctrl.owsend = async (req, res) => {
 }
 
 ctrl.delete = async (req, res) => { //N
-    const idOrden = req.params.id
+    const idOrden = req.query.id
     const deleteOrden = await orden.findByIdAndDelete(idOrden)
     if (!deleteOrden)
         return res.status(400).json({ message: "el pedido que intenta eliminar no existe en el carrito" })
     res.status(400).json({ message: "la eliminacion ha sido exitosa exitosa" })
 }
 ctrl.create = async (req, res) => { //N
-    const idOrden = req.params.id
+    const idOrden = req.query.id
     const findOrden = await findById(idOrden)
     if (!findOrden)
         return res.status(400).json({ message: "el pedido no existe" })
@@ -189,7 +189,7 @@ ctrl.create = async (req, res) => { //N
 }
 
 ctrl.owtoproc = async (req, res) => { //N
-    const idOrden = req.params.id
+    const idOrden = req.query.id
     const findOrden = await findById(idOrden)
     if (!findOrden)
         return res.status(400).json({ message: "la orden no existe" })
@@ -234,13 +234,13 @@ ctrl.wait = async (req, res) => {
 }
 
 ctrl.confrec = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.query
     await orden.findByIdAndUpdate(id, { estado: 4 })
     res.status(200).send('acaba de confirmar la orden')
 }
 
 ctrl.owtosend = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.query
     await orden.findByIdAndUpdate(id, { estado: 3 })
 }
 ctrl.fac = async (req, res) => {

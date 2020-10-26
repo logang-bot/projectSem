@@ -3,7 +3,7 @@ const ctrl = {}
 const { menu,restaurant } = require('../models')
 
 ctrl.index = async (req, res) => {
-    const f_resta = await restaurant.findOne({ _id: req.params.idRes })
+    const f_resta = await restaurant.findOne({ _id: req.query.idRes })
     console.log(f_resta)
 
     if (!f_resta)
@@ -24,11 +24,11 @@ ctrl.create = async (req,res)=>{
     if(!cantidad_por_dia) errors.push({error: "la cantidad por dia es requerida"})
     if(errors.length>0) return res.status(501).json(errors)
     else{
-        const men = await menu.findOne({nombre, id_rest: req.params.idRes})
+        const men = await menu.findOne({nombre, id_rest: req.query.idRes})
         if(men) return res.send('ya registro un producto con este nombre')
         else{
             const newmenu  = new menu(req.body)
-            const {idRes} = req.params
+            const {idRes} = req.query
             newmenu.id_rest = idRes
             await newmenu.save()
             res.status(200).json({message: 'menu creado satisfactoriamente'})
@@ -38,7 +38,7 @@ ctrl.create = async (req,res)=>{
 
 
 ctrl.index = async (req, res) => {
-    const f_resta = await restaurant.findOne({ _id: req.params.idRes })
+    const f_resta = await restaurant.findOne({ _id: req.query.idRes })
     if (!f_resta)
         return res.status(400).json ({message: "no existe el restaurant"});
     else{
@@ -49,7 +49,7 @@ ctrl.index = async (req, res) => {
     }
 }
 ctrl.edit = async (req, res) => {
-    const id = req.params.id
+    const id = req.query.id
     var datos = req.body;
     if(!datos.nombre || !datos.precio || !datos.descripcion || !datos.cantidad_por_dia){
         return res.status(400).send({message: 'No se permite campos vacios'});
@@ -68,7 +68,7 @@ ctrl.edit = async (req, res) => {
 
 
 ctrl.delete = async (req,res) => {
-    const idMenu = req.params.id
+    const idMenu = req.query.id
     const d_menu= await menu.findByIdAndDelete(idMenu)
     if(!d_menu)
         return res.status(400).json({message: "el menu que intenta eliminar no existe"})
