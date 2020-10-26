@@ -112,6 +112,7 @@ ctrl.delete = async (req, res) => {
     res.send('El restaurant fue eliminado exitosamente')
 }
 
+<<<<<<< HEAD
 ctrl.setlugar = async (req,res)=>{
     const { id } = req.params
     const restt = await restaurant.findById(id)
@@ -204,5 +205,14 @@ ctrl.delFotoLugar = async (req,res)=>{
     await restaurant.findByIdAndUpdate(id, {FotoLugar: ""})
     res.send('Foto del lugar eliminado')
 }
+=======
+ctrl.mydata = async (req,res) => {
+    console.log(req.query)
+    const idRes =req.query.id
+    const rest = await restaurant.findById(idRes)
+    res.status(200).json(rest)
+}
+
+>>>>>>> afb776e8b69aa9caa561795bf14b09675646bd70
 
 module.exports = ctrl

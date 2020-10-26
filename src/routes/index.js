@@ -33,6 +33,7 @@ router.post('/res/create',auth,restaurant.create)
 router.put('/res/edit/:id',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)
 router.delete('/res/delete/:id',restaurant.delete)
+<<<<<<< HEAD
     //rutas para imagen
 router.post('/res/setcover/:id', auth, restaurant.setlugar)
 router.post('/res/setlogo/:id', auth, restaurant.setlogo)
@@ -41,6 +42,9 @@ router.put('/res/edlogo/:id', auth, restaurant.editLogo)
 router.put('/res/edfoto/:id', auth, restaurant.editFotoLugar)*/
 router.put('/res/dellogo/:id', auth, restaurant.delLogo)
 router.put('/res/delfoto/:id', auth, restaurant.delFotoLugar)
+=======
+router.get('/res/mydata', auth, restaurant.mydata)
+>>>>>>> afb776e8b69aa9caa561795bf14b09675646bd70
 
 //rutas para menu
 router.get('/menu/:idRes',menu.index)
@@ -58,6 +62,7 @@ router.put('/orden/create/:id', orden.create)//confirmar orden N
 router.get('/orden/list',auth, orden.ord) // listar ordenes R
 router.get('/orden/listwait',auth, orden.wait) //listar en espera por usuario G
 router.put('/orden/confirmrec',auth, orden.confrec) // confirmar recepcion G
+router.put('/orden/solicitarf',auth, orden.fac)// Solicitar factura R
 //                              OWNER    
 
 router.get('/orden/ow/listall',auth, orden.owall) // listar ordenes solicitadas por usuario (dueño) R

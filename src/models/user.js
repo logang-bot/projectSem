@@ -8,6 +8,8 @@ const userSchema = new Schema({
     password:{type: String, required:true},
     avatar:{type: String},
     date:{type:Date, default: Date.now},
+    namefac:{type: String},
+    cifac:{type: String}
 })
 
 userSchema.methods.encrypt = async (password)=>{
