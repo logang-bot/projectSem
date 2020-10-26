@@ -103,21 +103,36 @@ ctrl.edAvatar = async (req,res)=>{
 
 ctrl.edit = async (req, res) => {
     var id = req.userId;
-    var datos = req.body;
-    const usser = new user({ password: datos.password });
-    usser.password = await usser.encrypt(datos.password);
-    datos.password = usser.password;
-    //datos.name="elena";
-    console.log(datos.name);
-    const us =user.findByIdAndUpdate(id, datos, (err, docs) => {
-        if (err) {
-            res.status(500).json({ msn: "Existen problemas en la base de datos" });
-            return;
-        } else {
-            return res.status(200).json(docs);
+    var {name,email,password,confirm_password} = req.body 
+    if(name && email && password){  
+        const useremail= await user.findOne({email: email}) //no olvidar el await 
+        console.log(useremail)
+        if (useremail){
+            console.log("el email ya esta en uso, ingrese otro diferente")
+            return res.send({message: "el email ya esta en uso, ingrese otro diferente"})
         }
-    })
-    //console.log()
+        if(password != confirm_password){
+            console.log("las constraseñas no coinciden :/")
+            return res.send({message: "las contraseñas no coinciden :/"})
+        }
+        const usser = new user({ password: password });
+        usser.password = await usser.encrypt(password);
+        password = usser.password;
+
+        const us =user.findByIdAndUpdate(id, {name, email, password}, (err, docs) => {
+            if (err) {
+                res.send({ message: "Existen problemas en la base de datos" });
+                return;
+            } else {
+                return res.send({message: "usuario actualizado"});
+            }
+        })
+    }else{
+        console.log("campos vacios"+ name + email + password)
+        return res.send({
+            message: 'uno o mas campos estan vacios'
+        });
+    }
 }
 
 ctrl.delete = async (req,res)=>{
