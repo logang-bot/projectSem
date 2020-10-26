@@ -2,6 +2,7 @@ const {imagen} = require('../models')
 const{random} = require('../helpers/libs')
 const fs = require('fs-extra')
 const path = require('path')
+const { query } = require('express')
 
 const ctrl={}
 
@@ -10,9 +11,9 @@ async function get(req,res){
     //console.log(req.params)
     /*const allimages = await imagen.find({})
     return res.send(allimages)*/
-    var params = req.params
+    var params = req.query   /////****** */
     if(!params)return res.send('es necesario un id')
-    var {id} = params
+    var {id} = query ////**** */
     //return res.send(id)
     var gimg = await imagen.findOne({filename: {$regex: req.params.id}})
     if(gimg) return res.sendFile(gimg.path)

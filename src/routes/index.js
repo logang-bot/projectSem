@@ -44,18 +44,18 @@ router.put('/res/delfoto', auth, restaurant.delFotoLugar)  // REQ ID RESTAURANT
 router.get('/res/mydata', auth, restaurant.mydata) 
 
 //rutas para menu
-router.get('/menu/:idRes',menu.index)
-router.post('/menu/create/:idRes',menu.create)
-router.put('/menu/edit/:id',menu.edit)
-router.delete('/menu/delete/:id',menu.delete)
+router.get('/menu/:idRes',menu.index)   // QUERY ID RESTAURANT ON MENU
+router.post('/menu/create/',menu.create)  // QUERY ID RESTAURANY ON MENU
+router.put('/menu/edit',menu.edit) // QUERY ID MENU
+router.delete('/menu/delete',menu.delete)  // QUERY ID MENU
 
 //rutas para orden
 //user
 router.get('/orden/listcart',auth, orden.index) //listar pedidos G
-router.post('/orden/cart/:idMenu',auth, orden.cart) //creacion pedido G
-router.put('/orden/edit/:id', orden.edit) // actua pedido R
-router.delete('/orden/delete/:id', orden.delete) //Eliminar pedido N
-router.put('/orden/create/:id', orden.create)//confirmar orden N
+router.post('/orden/cart',auth, orden.cart) //creacion pedido G  //QUERY ID
+router.put('/orden/edit', orden.edit) // actua pedido R  // QUERY ID ORDEN
+router.delete('/orden/delete', orden.delete) //Eliminar pedido N  //QUERY ID ORDEN
+router.put('/orden/create', orden.create)//confirmar orden N    //QUERY ID ORDEN
 router.get('/orden/list',auth, orden.ord) // listar ordenes R
 router.get('/orden/listwait',auth, orden.wait) //listar en espera por usuario G
 router.put('/orden/confirmrec',auth, orden.confrec) // confirmar recepcion G
