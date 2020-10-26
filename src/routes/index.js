@@ -25,8 +25,6 @@ router.post('/user/logIn',user.login)
 router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
 router.get('/user/mydata', auth, user.mydata)
-    //rutas para imagen
-router.put('/user/edAvatar', auth, user.edAvatar)
 
 //rutas para restaurant
 router.get('/res',restaurant.index)
@@ -35,7 +33,6 @@ router.post('/res/create',auth,restaurant.create)
 router.put('/res/edit/:id',restaurant.edit)
 router.patch('/res/chang/:id',auth, restaurant.change)
 router.delete('/res/delete/:id',restaurant.delete)
-<<<<<<< HEAD
     //rutas para imagen
 router.post('/res/setcover/:id', auth, restaurant.setlugar)
 router.post('/res/setlogo/:id', auth, restaurant.setlogo)
@@ -44,9 +41,7 @@ router.put('/res/edlogo/:id', auth, restaurant.editLogo)
 router.put('/res/edfoto/:id', auth, restaurant.editFotoLugar)*/
 router.put('/res/dellogo/:id', auth, restaurant.delLogo)
 router.put('/res/delfoto/:id', auth, restaurant.delFotoLugar)
-=======
-router.get('/res/mydata', auth, restaurant.mydata)
->>>>>>> afb776e8b69aa9caa561795bf14b09675646bd70
+router.get('/res/mydata', auth, restaurant.mydata) //warning git
 
 //rutas para menu
 router.get('/menu/:idRes',menu.index)
