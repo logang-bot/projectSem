@@ -71,15 +71,20 @@ ctrl.edit = async (req, res) => {
     if (nombre && nit && calle && telefono && log && lat) {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
         const bnit = await restaurant.findOne({ nit: nit })
-        if (bnombre)
-            return res.status(400).json({ message: "el nombre ya esta en uso, ingrese otro diferente" })
-        if (bnit)
-            return res.status(400).json({ message: "el nit ya esta en uso, ingrese otro diferente" })
-
+        if (bnombre) {
+            if (req.userId != bnombre.propietario) {
+                return res.send({ message: "el nombre ya esta en uso, ingrese otro diferente" })
+            }
+        }
+        if (bnit){
+            if (req.userId != bnombre.propietario) {
+                return res.send({ message: "el nit ya esta en uso, ingrese otro diferente" })
+            }
+        }
         await restaurant.findByIdAndUpdate(id, { nombre, nit, calle, telefono, log, lat })
-        res.send("Fue actualizado correctamente")
+        res.send({message: "Fue actualizado correctamente"})
     } else {
-        return res.status(400).send({
+        return res.send({
             message: 'uno o mas campos estan vacios'
         });
     }
@@ -124,7 +129,7 @@ ctrl.setlugar = async (req,res)=>{
         else {
             await restaurant.findByIdAndUpdate(id, { foto: img })
             console.log('foto del lugar agregada')
-            res.send('Foto del lugar agregada')
+            res.send({message : 'Foto del lugar agregada'})
         }
     }
     else {
@@ -138,13 +143,14 @@ ctrl.setlogo = async (req,res)=>{
     const {id} = req.query
     const img = await saveimage.cre(req, res)
     if(img == "fail"){
-        res.send("el formato no es valido")
+        res.send({message: "el formato no es valido"})
     }else if (img == "") res.send('debe subir un archivo')
     else {
         await restaurant.findByIdAndUpdate(id, {logo: img})
-        res.send('Logo actualizado')
+        res.send({message: 'Logo actualizado'})
     }
 }
+
 /*
 ctrl.lugar = async (req,res) => {
     const { id } = req.params
@@ -211,5 +217,10 @@ ctrl.mydata = async (req,res) => {
     res.status(200).json(rest)
 }
 
+ctrl.search = async(req,res)=>{
+    const {word} = req.query
+    const rests = await restaurant.find({ nombre:{ $regex : word, $options : 'i'} })
+    res.send(rests)
+}
 
 module.exports = ctrl
