@@ -124,7 +124,8 @@ ctrl.edit = async (req, res) => {
                 res.send({ message: "Existen problemas en la base de datos" });
                 return;
             } else {
-                return res.send({message: "usuario actualizado"});
+                console.log("usuario actualizado")
+                return res.send({message: "sugoi"});
             }
         })
     }else{
@@ -138,7 +139,7 @@ ctrl.edit = async (req, res) => {
 ctrl.delete = async (req,res)=>{
     console.log(req.userId)
     await user.findByIdAndDelete(req.userId)
-    res.send('el usuario fue eliminado exitosamente')
+    res.send({message: 'esto no es sugoi'})
 }
 
 ctrl.mydata = async (req,res)=>{
@@ -146,11 +147,5 @@ ctrl.mydata = async (req,res)=>{
     const userr = await user.findById(req.userId)
     res.status(200).json(userr)
 }
-
-/*ctrl.logIn = passport.authenticate('local',{
-    successRedirect: '/',
-    failureRedirect: '/',
-})
-*/
 
 module.exports = ctrl
