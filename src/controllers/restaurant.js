@@ -124,7 +124,7 @@ ctrl.setlugar = async (req,res)=>{
         else {
             await restaurant.findByIdAndUpdate(id, { foto: img })
             console.log('foto del lugar agregada')
-            res.send('Foto del lugar agregada')
+            res.send({message : 'Foto del lugar agregada'})
         }
     }
     else {
@@ -138,11 +138,11 @@ ctrl.setlogo = async (req,res)=>{
     const {id} = req.query
     const img = await saveimage.cre(req, res)
     if(img == "fail"){
-        res.send("el formato no es valido")
+        res.send({message: "el formato no es valido"})
     }else if (img == "") res.send('debe subir un archivo')
     else {
         await restaurant.findByIdAndUpdate(id, {logo: img})
-        res.send('Logo actualizado')
+        res.send({message: 'Logo actualizado'})
     }
 }
 
