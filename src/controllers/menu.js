@@ -76,4 +76,11 @@ ctrl.delete = async (req,res) => {
 }
     
 
+ctrl.data = async (req,res) => {
+    console.log(req.query)
+    const idRes =req.query.idRes
+    const menu = await menu.findOne({id_rest: idRes})
+    res.status(200).json(menu)
+}
+
 module.exports = ctrl
