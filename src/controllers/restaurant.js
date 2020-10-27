@@ -71,15 +71,20 @@ ctrl.edit = async (req, res) => {
     if (nombre && nit && calle && telefono && log && lat) {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
         const bnit = await restaurant.findOne({ nit: nit })
-        if (bnombre)
-            return res.status(400).json({ message: "el nombre ya esta en uso, ingrese otro diferente" })
-        if (bnit)
-            return res.status(400).json({ message: "el nit ya esta en uso, ingrese otro diferente" })
-
+        if (bnombre) {
+            if (req.userId != bnombre.propietario) {
+                return res.send({ message: "el nombre ya esta en uso, ingrese otro diferente" })
+            }
+        }
+        if (bnit){
+            if (req.userId != bnombre.propietario) {
+                return res.send({ message: "el nit ya esta en uso, ingrese otro diferente" })
+            }
+        }
         await restaurant.findByIdAndUpdate(id, { nombre, nit, calle, telefono, log, lat })
-        res.send("Fue actualizado correctamente")
+        res.send({message: "Fue actualizado correctamente"})
     } else {
-        return res.status(400).send({
+        return res.send({
             message: 'uno o mas campos estan vacios'
         });
     }
