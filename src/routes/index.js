@@ -25,6 +25,8 @@ router.post('/user/logIn',user.login)
 router.put('/user/edit',auth ,user.edit)
 router.delete('/user/delete', auth , user.delete)
 router.get('/user/mydata', auth, user.mydata)
+    //rutas para imagen
+router.put('/user/edAvatar', auth, user.edAvatar)
 
 //rutas para restaurant
 router.get('/res',restaurant.index)
@@ -33,6 +35,8 @@ router.post('/res/create',auth,restaurant.create)
 router.put('/res/edit',auth,restaurant.edit)     // REQ ID RESTAURANT
 router.patch('/res/chang',auth, restaurant.change) // REQ ID RESTAURANT
 router.delete('/res/delete',restaurant.delete) // REQ ID RESTAURANT
+router.get('/res/search', restaurant.search) // query keyword
+
     //rutas para imagen
 router.post('/res/setcover', auth, restaurant.setlugar) // REQ ID RESTAURANT
 router.post('/res/setlogo', auth, restaurant.setlogo) // REQ ID RESTAURANT
@@ -48,6 +52,7 @@ router.get('/menu',menu.index)   // QUERY ID RESTAURANT ON MENU
 router.post('/menu/create',menu.create)  // QUERY ID RESTAURANY ON MENU
 router.put('/menu/edit',menu.edit) // QUERY ID MENU
 router.delete('/menu/delete',menu.delete)  // QUERY ID MENU
+router.get('/menu/search', menu.search) // query keyword
 
 //rutas para orden
 //user
@@ -69,7 +74,5 @@ router.put('/orden/ow/toproc', orden.owtoproc) //cambiar de estado espera a proc
 router.put('/orden/ow/tosend',auth, orden.owtosend) //cambiar de estado proceso a enviado G
 router.get('/orden/ow/listsend', orden.owsend) //listar ordenes enviadas por usuario (dueño) R //QUERY ID
 router.get('/orden/ow/listdeliv', auth, orden.owdeliv) //  listar ordenes entregadas por usuario (dueño)N g
-
-
 
 module.exports = router

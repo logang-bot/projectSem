@@ -150,6 +150,7 @@ ctrl.setlogo = async (req,res)=>{
         res.send('Logo actualizado')
     }
 }
+
 /*
 ctrl.lugar = async (req,res) => {
     const { id } = req.params
@@ -216,5 +217,10 @@ ctrl.mydata = async (req,res) => {
     res.status(200).json(rest)
 }
 
+ctrl.search = async(req,res)=>{
+    const {word} = req.query
+    const rests = await restaurant.find({ nombre:{ $regex : word, $options : 'i'} })
+    res.send(rests)
+}
 
 module.exports = ctrl

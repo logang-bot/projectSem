@@ -74,6 +74,11 @@ ctrl.delete = async (req,res) => {
         return res.status(400).json({message: "el menu que intenta eliminar no existe"})
     res.status(400).json({message: "eliminacion exitosa"})
 }
-    
+
+ctrl.search = async (req,res)=>{
+    const {word} = req.query
+    const menus = await menu.find({ nombre:{ $regex : word, $options : 'i'} })
+    res.send(menus)
+}
 
 module.exports = ctrl
