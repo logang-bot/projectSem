@@ -30,7 +30,7 @@ router.get('/user/mydata', auth, user.mydata)
 router.get('/res',restaurant.index)
 router.get('/res/list',auth,restaurant.index2)
 router.post('/res/create',auth,restaurant.create)
-router.put('/res/edit',restaurant.edit)     // REQ ID RESTAURANT
+router.put('/res/edit',auth,restaurant.edit)     // REQ ID RESTAURANT
 router.patch('/res/chang',auth, restaurant.change) // REQ ID RESTAURANT
 router.delete('/res/delete',restaurant.delete) // REQ ID RESTAURANT
     //rutas para imagen
