@@ -8,6 +8,8 @@ const menu = new Schema({
     descripcion:{type: String},
     fechareg:{type: Date , default: Date.now},
     foto:{type: String, default:""},
+    resta: {type: String},
+    imgresta:{type: String},
     id_rest :{ 
         type: Schema.Types.ObjectId,
         ref : 'restaurant'

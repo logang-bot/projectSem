@@ -1,6 +1,7 @@
 //controlador de menu
 const ctrl = {}
 const { menu,restaurant } = require('../models')
+const saveimage = require('../controllers/image')
 
 ctrl.index = async (req, res) => {
     const f_resta = await restaurant.findOne({ _id: req.query.idRes })
@@ -30,8 +31,19 @@ ctrl.create = async (req,res)=>{
             const newmenu  = new menu(req.body)
             const {idRes} = req.query
             newmenu.id_rest = idRes
+            const auxrest = await restaurant.findById(idRes)
+            newmenu.resta = auxrest.nombre
+            newmenu.imgresta = auxrest.logo
+            const img = await saveimage.cre(req,res)
+            if(img == "fail"){
+                res.send('el formato no es valido')
+                return
+            }
+            else newmenu.foto = img
+            //console.log("fghimg is" + img)
+
             await newmenu.save()
-            res.status(200).json({message: 'menu creado satisfactoriamente'})
+            res.send({message: 'menu creado satisfactoriamente'})
         }
     }
 }
@@ -76,9 +88,24 @@ ctrl.delete = async (req,res) => {
 }
 
 ctrl.search = async (req,res)=>{
+    /*const menuss = await menu.find({})
+    res.send(menuss)*/
     const {word} = req.query
     const menus = await menu.find({ nombre:{ $regex : word, $options : 'i'} })
     res.send(menus)
+}
+
+ctrl.mydata = async (req,res)=>{
+    console.log(req.query)
+    const idMenu =req.query.id
+    const menuu = await menu.findById(idMenu)
+    res.send(menuu)
+}
+
+ctrl.aux = async (req,res)=>{
+    const idMenu = req.query.id
+    const targetMenu = await menu.findByIdAndUpdate(idMenu, {imgresta: req.body.resta})
+    res.send('ok')
 }
 
 module.exports = ctrl
