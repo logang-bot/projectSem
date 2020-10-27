@@ -110,9 +110,9 @@ ctrl.aux = async (req,res)=>{
 
 ctrl.data = async (req,res) => {
     console.log(req.query)
-    const idRes =req.query.idRes
-    const menu = await menu.findOne({id_rest: idRes})
-    res.status(200).json(menu)
+    const idMenu =req.query.idMenu
+    const menuE = await menu.findById(idMenu)
+    res.status(200).json(menuE)
 }
 
 module.exports = ctrl
