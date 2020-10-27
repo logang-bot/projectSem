@@ -63,11 +63,11 @@ router.put('/orden/solicitarf',auth, orden.fac)// Solicitar factura R
 //                              OWNER    
 
 router.get('/orden/ow/listall',auth, orden.owall) // listar ordenes solicitadas por usuario (dueño) R
-router.get('/orden/ow/listres/:idRes', orden.owres) //listar ordenes solicitadas por restaurant (dueño) N g
-router.get('/orden/ow/listmen/:id', orden.owmen) // ]listar ordenes solicitadas por menu (dueño) R
-router.put('/orden/ow/toproc/:id', orden.owtoproc) //cambiar de estado espera a proceso N
+router.get('/orden/ow/listres', orden.owres) //listar ordenes solicitadas por restaurant (dueño) N g //     QUERY ID REST
+router.get('/orden/ow/listmen', orden.owmen) // ]listar ordenes solicitadas por menu (dueño) R //QUERY ID
+router.put('/orden/ow/toproc', orden.owtoproc) //cambiar de estado espera a proceso N  //QUERY ID
 router.put('/orden/ow/tosend',auth, orden.owtosend) //cambiar de estado proceso a enviado G
-router.get('/orden/ow/listsend/:id', orden.owsend) //listar ordenes enviadas por usuario (dueño) R
+router.get('/orden/ow/listsend', orden.owsend) //listar ordenes enviadas por usuario (dueño) R //QUERY ID
 router.get('/orden/ow/listdeliv', auth, orden.owdeliv) //  listar ordenes entregadas por usuario (dueño)N g
 
 
