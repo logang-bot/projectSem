@@ -18,7 +18,7 @@ ctrl.create = async (req, res) => {
     var newresta = new restaurant
     var { nombre, nit, calle, telefono, log, lat } = req.body
 
-    if (nombre && nit && calle && telefono && log && lat) {
+    if (nombre && nit && calle && telefono) {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
         const bnit = await restaurant.findOne({ nit: nit })
         if (bnombre)
@@ -30,8 +30,8 @@ ctrl.create = async (req, res) => {
         newresta.propietario = req.userId; //id del usuario
         newresta.calle = calle;
         newresta.telefono = telefono;
-        newresta.log = log;
-        newresta.lat = lat;
+        //newresta.log = log;
+        //newresta.lat = lat;
 
 
         const img = await saveimage.cre(req,res)
@@ -48,13 +48,14 @@ ctrl.create = async (req, res) => {
             if (err)
                 return res.status(500).send({ message: `Error en el servidor ${err}` });
             if (restsaved) {
-                return res.status(200).send({
+                console.log("El restaurant fue creado correctamente")
+                return res.send({
                     message: 'El restaurant fue creado correctamente',
-                    result: restsaved
+                    _id: restsaved.id
                 });
             } else {
                 return res.status(500).send({
-                    message: 'No se ha guardado el usuario'
+                    message: 'No se ha guardado el restaurante'
                 });
             }
 
