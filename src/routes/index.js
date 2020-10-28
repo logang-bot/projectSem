@@ -36,7 +36,6 @@ router.put('/res/edit',auth,restaurant.edit)     // REQ ID RESTAURANT
 router.patch('/res/chang',auth, restaurant.change) // REQ ID RESTAURANT
 router.delete('/res/delete',restaurant.delete) // REQ ID RESTAURANT
 router.get('/res/search', restaurant.search) // query keyword
-
     //rutas para imagen
 router.post('/res/setcover', auth, restaurant.setlugar) // REQ ID RESTAURANT
 router.post('/res/setlogo', auth, restaurant.setlogo) // REQ ID RESTAURANT
