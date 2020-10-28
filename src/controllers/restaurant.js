@@ -17,7 +17,6 @@ ctrl.index2 = async (req, res) => {
 ctrl.create = async (req, res) => {
     var newresta = new restaurant
     var { nombre, nit, calle, telefono, log, lat } = req.body
-
     if (nombre && nit && calle && telefono && log && lat) {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
         const bnit = await restaurant.findOne({ nit: nit })
@@ -25,9 +24,11 @@ ctrl.create = async (req, res) => {
             return res.send({ message: "el nombre ya esta en uso, ingrese otro diferente" })
         if (bnit)
             return res.send({ message: "el nit ya esta en uso, ingrese otro diferente" })
+        const NomProp=await user.findById(req.userId) //para obtener nombre de usuario
         newresta.nombre = nombre;
         newresta.nit = nit;
         newresta.propietario = req.userId; //id del usuario
+        newresta.nombrePropietario = NomProp.name;
         newresta.calle = calle;
         newresta.telefono = telefono;
         newresta.log = log;
