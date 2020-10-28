@@ -115,7 +115,7 @@ ctrl.change = async (req, res) => {
 ctrl.delete = async (req, res) => {
     const id = req.query.id
     await restaurant.findByIdAndDelete(id)
-    res.send('El restaurant fue eliminado exitosamente')
+    res.send({message:'El restaurant fue eliminado exitosamente'})
 }
 
 ctrl.setlugar = async (req,res)=>{
