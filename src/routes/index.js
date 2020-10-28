@@ -51,6 +51,7 @@ router.get('/menu',menu.index)   // QUERY ID RESTAURANT ON MENU
 router.post('/menu/create',menu.create)  // QUERY ID RESTAURANY ON MENU
 router.put('/menu/edit',menu.edit) // QUERY ID MENU
 router.delete('/menu/delete',menu.delete)  // QUERY ID MENU
+router.get('/menu/data',  menu.data) 
 router.get('/menu/search', menu.search) // query keyword
 router.get('/menu/mydata', menu.mydata)
     //aux
