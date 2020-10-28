@@ -22,9 +22,9 @@ ctrl.create = async (req, res) => {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
         const bnit = await restaurant.findOne({ nit: nit })
         if (bnombre)
-            return res.status(400).json({ message: "el nombre ya esta en uso, ingrese otro diferente" })
+            return res.send({ message: "el nombre ya esta en uso, ingrese otro diferente" })
         if (bnit)
-            return res.status(400).json({ message: "el nit ya esta en uso, ingrese otro diferente" })
+            return res.send({ message: "el nit ya esta en uso, ingrese otro diferente" })
         newresta.nombre = nombre;
         newresta.nit = nit;
         newresta.propietario = req.userId; //id del usuario
@@ -46,14 +46,14 @@ ctrl.create = async (req, res) => {
 
         await newresta.save((err, restsaved) => {
             if (err)
-                return res.status(500).send({ message: `Error en el servidor ${err}` });
+                return res.send({ message: `Error en el servidor ${err}` });
             if (restsaved) {
-                return res.status(200).send({
+                return res.send({
                     message: 'El restaurant fue creado correctamente',
                     result: restsaved
                 });
             } else {
-                return res.status(500).send({
+                return res.send({
                     message: 'No se ha guardado el usuario'
                 });
             }
