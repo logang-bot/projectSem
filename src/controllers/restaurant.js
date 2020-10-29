@@ -25,11 +25,9 @@ ctrl.create = async (req, res) => {
             return res.send({ message: "el nombre ya esta en uso, ingrese otro diferente" })
         if (bnit)
             return res.send({ message: "el nit ya esta en uso, ingrese otro diferente" })
-        const NomProp=await user.findById(req.userId) //para obtener nombre de usuario
         newresta.nombre = nombre;
         newresta.nit = nit;
         newresta.propietario = req.userId; //id del usuario
-        newresta.nombrePropietario = NomProp.name;
         newresta.calle = calle;
         newresta.telefono = telefono;
         //newresta.log = log;
@@ -243,6 +241,13 @@ ctrl.search = async(req,res)=>{
     const {word} = req.query
     const rests = await restaurant.find({ nombre:{ $regex : word, $options : 'i'} })
     res.send(rests)
+}
+
+ctrl.propdata = async(req,res)=>{
+    const idRes =req.userId
+    const datosProp= await user.findById(idRes)
+    console.log(datosProp.name)
+    res.send({message: datosProp.name})
 }
 
 module.exports = ctrl

@@ -5,7 +5,6 @@ const Res = new Schema({
     nombre:{type: String},
     nit:{type: String},
     propietario:{type: String},
-    nombrePropietario:{type: String},
     calle:{type: String},
     telefono:{type: String},
     log:{type: String},
