@@ -8,7 +8,7 @@ router.use(fileupload({
     fileSize: 50*1024*1024
 }))
 
-router.get('/', auth, (req,res)=>{
+router.get('/', (req,res)=>{
     if(req.user) console.log(req.user.id)
     else console.log('empty')
     res.send('que pex')
@@ -36,6 +36,7 @@ router.put('/res/edit',auth,restaurant.edit)     // REQ ID RESTAURANT
 router.patch('/res/chang',auth, restaurant.change) // REQ ID RESTAURANT
 router.delete('/res/delete',restaurant.delete) // REQ ID RESTAURANT
 router.get('/res/search', restaurant.search) // query keyword
+router.post('/res/setlocation', auth, restaurant.setlocation) //query id rest
     //rutas para imagen
 router.post('/res/setcover', auth, restaurant.setlugar) // REQ ID RESTAURANT
 router.post('/res/setlogo', auth, restaurant.setlogo) // REQ ID RESTAURANT
@@ -54,8 +55,10 @@ router.delete('/menu/delete',menu.delete)  // QUERY ID MENU
 router.get('/menu/data',  menu.data) 
 router.get('/menu/search', menu.search) // query keyword
 router.get('/menu/mydata', menu.mydata)
+    //rutas para imagen
+router.post('/menu/setfoto', auth, menu.setfoto) // query idmenu
     //aux
-    router.post('/menu/aux/upd', menu.aux)
+router.post('/menu/aux/upd', menu.aux)
 
 //rutas para orden
 //user

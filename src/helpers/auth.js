@@ -2,14 +2,14 @@ const jwt = require('jsonwebtoken')
 const moment = require('moment')
 const config = require('../config/config')
 
-function auth(req,res,next){
+async function auth(req,res,next){
     const token = req.headers['x-access-token']
     if(!token){
         console.log("falta un token")
         return res.send({message: "falta un token"})
     }
     try {
-        const decod = jwt.verify(token, config.secret)
+        const decod = await jwt.verify(token, config.secret)
         if (decod) {
             console.log(moment())
             console.log(decod)
