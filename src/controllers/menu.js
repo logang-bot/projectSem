@@ -34,6 +34,7 @@ ctrl.create = async (req,res)=>{
             const auxrest = await restaurant.findById(idRes)
             newmenu.resta = auxrest.nombre
             newmenu.imgresta = auxrest.logo
+
             const img = await saveimage.cre(req,res)
             if(img == "fail"){
                 res.send('el formato no es valido')
@@ -43,7 +44,8 @@ ctrl.create = async (req,res)=>{
             //console.log("fghimg is" + img)
 
             await newmenu.save()
-            res.send({message: 'menu creado satisfactoriamente'})
+            res.send({message: 'menu creado satisfactoriamente',
+                        _id: newmenu.id})
         }
     }
 }
@@ -70,11 +72,11 @@ ctrl.edit = async (req, res) => {
         console.log(oldmenu)
         const menus = await menu.findOne({ nombre: datos.nombre, id_rest:oldmenu.id_rest})
 
-        if(!menus){
+        //if(!menus){
             await menu.findByIdAndUpdate(id,datos)
             return res.status(200).send({message: 'Datos actualizados'});
-        }else
-        return res.status(400).send({message: 'Ya existe ese producto'});
+        /*}else
+        return res.status(400).send({message: 'Ya existe ese producto'});*/
     }
 }
 
@@ -113,6 +115,21 @@ ctrl.data = async (req,res) => {
     const idMenu =req.query.idMenu
     const menuE = await menu.findById(idMenu)
     res.status(200).json(menuE)
+}
+
+ctrl.setfoto = async (req,res)=>{
+    console.log(req.query)
+    const idMenu =req.query.id
+    const menuu = await menu.findById(idMenu)
+
+    const img = await saveimage.cre(req, res)
+    if (img == "fail") {
+        res.send({message: 'el formato no es valido'})
+        return
+    }
+    else menuu.foto = img
+    await menuu.save()
+    res.send({ message: 'foto de menu actualizada' })
 }
 
 module.exports = ctrl

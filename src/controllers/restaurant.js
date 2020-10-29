@@ -1,5 +1,5 @@
 const ctrl = {}
-const { user, restaurant } = require('../models')
+const { user, restaurant, menu } = require('../models')
 const saveimage = require('../controllers/image')
 
 ctrl.index = async (req, res) => {
@@ -68,8 +68,8 @@ ctrl.create = async (req, res) => {
 }
 ctrl.edit = async (req, res) => {
     const id = req.query.id
-    var { nombre, nit, calle, telefono, log, lat } = req.body
-    if (nombre && nit && calle && telefono && log && lat) {
+    var { nombre, nit, calle, telefono} = req.body
+    if (nombre && nit && calle && telefono) {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
         const bnit = await restaurant.findOne({ nit: nit })
         if (bnombre) {
@@ -78,11 +78,12 @@ ctrl.edit = async (req, res) => {
             }
         }
         if (bnit){
-            if (req.userId != bnombre.propietario) {
+            if (req.userId != bnit.propietario) {
                 return res.send({ message: "el nit ya esta en uso, ingrese otro diferente" })
             }
         }
-        await restaurant.findByIdAndUpdate(id, { nombre, nit, calle, telefono, log, lat })
+        await restaurant.findByIdAndUpdate(id, { nombre, nit, calle, telefono})
+        await menu.updateMany({id_rest: id}, {resta:nombre})
         res.send({message: "Fue actualizado correctamente"})
     } else {
         return res.send({
