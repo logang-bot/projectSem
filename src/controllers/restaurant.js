@@ -22,12 +22,14 @@ ctrl.create = async (req, res) => {
         const bnombre = await restaurant.findOne({ nombre: nombre }) //consulta a la DB
         const bnit = await restaurant.findOne({ nit: nit })
         if (bnombre)
-            return res.status(400).json({ message: "el nombre ya esta en uso, ingrese otro diferente" })
+            return res.send({ message: "el nombre ya esta en uso, ingrese otro diferente" })
         if (bnit)
-            return res.status(400).json({ message: "el nit ya esta en uso, ingrese otro diferente" })
+            return res.send({ message: "el nit ya esta en uso, ingrese otro diferente" })
+        const NomProp=await user.findById(req.userId) //para obtener nombre de usuario
         newresta.nombre = nombre;
         newresta.nit = nit;
         newresta.propietario = req.userId; //id del usuario
+        newresta.nombrePropietario = NomProp.name;
         newresta.calle = calle;
         newresta.telefono = telefono;
         //newresta.log = log;
@@ -46,7 +48,7 @@ ctrl.create = async (req, res) => {
 
         await newresta.save((err, restsaved) => {
             if (err)
-                return res.status(500).send({ message: `Error en el servidor ${err}` });
+                return res.send({ message: `Error en el servidor ${err}` });
             if (restsaved) {
                 console.log("El restaurant fue creado correctamente")
                 return res.send({
@@ -54,14 +56,14 @@ ctrl.create = async (req, res) => {
                     _id: restsaved.id
                 });
             } else {
-                return res.status(500).send({
+                return res.send({
                     message: 'No se ha guardado el restaurante'
                 });
             }
 
         });
     } else {
-        return res.status(400).send({
+        return res.send({
             message: 'uno o mas campos estan vacios'
         });
     }
@@ -115,7 +117,7 @@ ctrl.change = async (req, res) => {
 ctrl.delete = async (req, res) => {
     const id = req.query.id
     await restaurant.findByIdAndDelete(id)
-    res.send('El restaurant fue eliminado exitosamente')
+    res.send({message:'El restaurant fue eliminado exitosamente'})
 }
 
 ctrl.setlugar = async (req,res)=>{
@@ -203,7 +205,7 @@ ctrl.editFotoLugar = async (req,res)=>{
         res.send('Foto del lugar actualizado')
     }
 }*/
-
+/////////////////
 ctrl.delLogo = async (req,res)=>{
     const {id} = req.query
     await restaurant.findByIdAndUpdate(id, {logo: ""})
@@ -215,6 +217,20 @@ ctrl.delFotoLugar = async (req,res)=>{
     await restaurant.findByIdAndUpdate(id, {foto: ""})
     res.send('Foto del lugar eliminado')
 }
+
+/////////////////
+
+ctrl.setlocation = async (req,res)=>{
+    const {id} = req.query
+    if(id == null || id==""){
+        console.log("no hay id de Rest")
+        return res.send({message: "no hay id de Rest"})
+    }
+    const {log, lat} = req.body
+    await restaurant.findByIdAndUpdate(id,{log, lat})
+    res.send({message: 'ubicacion actualizada'})
+}
+
 ctrl.mydata = async (req,res) => {
     console.log(req.query)
     const idRes =req.query.id
