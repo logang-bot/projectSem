@@ -22,6 +22,11 @@ ctrl.signUp = async (req, res) => {
             return res.send({ message: "el email ya esta en uso, ingrese otro diferente", token: "---" })
         }
 
+        if(!/\w+\@\w+\.\w{2,3}/.test(email)){
+            console.log("el email no es valido")
+            return res.send({ message: "el email no es valido"})
+        }
+    
         if (password != confirm_password) {
             console.log("las constraseñas no coinciden :/")
             return res.send({ message: "las contraseñas no coinciden :/" })
@@ -113,6 +118,12 @@ ctrl.edit = async (req, res) => {
                 return res.send({ message: "el email ya esta en uso, ingrese otro diferente" })
             }
         }
+
+        if(!/\w+\@\w+\.\w{2,3}/.test(email)){
+            console.log("el email no es valido")
+            return res.send({ message: "el email no es valido"})
+        }
+        
         if (password != confirm_password) {
             console.log("las constraseñas no coinciden :/")
             return res.send({ message: "las contraseñas no coinciden :/" })
