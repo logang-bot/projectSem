@@ -70,11 +70,11 @@ ctrl.edit = async (req, res) => {
         console.log(oldmenu)
         const menus = await menu.findOne({ nombre: datos.nombre, id_rest:oldmenu.id_rest})
 
-        if(!menus){
+        //if(!menus){
             await menu.findByIdAndUpdate(id,datos)
             return res.status(200).send({message: 'Datos actualizados'});
-        }else
-        return res.status(400).send({message: 'Ya existe ese producto'});
+        /*}else
+        return res.status(400).send({message: 'Ya existe ese producto'});*/
     }
 }
 
